@@ -9,8 +9,13 @@ import HomePage from '@/components/HomePage';
 export default function Home() {
 
   const { data: session, status } = useSession()
-  if(status === 'unauthenticated') redirect('/signin')
-  if(status === 'loading') return <></>
+  if(status === 'unauthenticated') redirect('/sign-in')
+  if(status === 'loading'){
+    return (
+    <div className='w-screen h-screen flex items-center justify-center'>
+      <span className="loading loading-spinner loading-lg text-primary"></span>
+    </div>)
+  }
   return (
     <>
       <Navbar session={session}/>

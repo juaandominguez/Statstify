@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ session }) => {
     <>
     <div className="navbar bg-base-100">
         <div className="flex-1 ml-10">
-            <a className="btn btn-ghost normal-case text-xl">SpotiWrapped</a>
+            <a className="btn btn-ghost normal-case text-xl text-secondary">SpotiWrapped</a>
         </div>
         <div className="dropdown dropdown-end mr-10">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

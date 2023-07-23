@@ -31,7 +31,7 @@ async function getTopTracks(){
         const topTracks = await getTopTracks();
           topTracks?.map((track: any, index: number) => (
             console.log(`${index + 1}- ${track.name} Made by: `,
-            track.artists.map((artist: any) => (`${artist.name} `)))
+            track.artists.map((artist: any) => (`${artist.name} `)).join(''))
           )
         )
       }
