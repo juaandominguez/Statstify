@@ -1,28 +1,27 @@
 "use client";
-import React from 'react'
+import React, { useEffect } from 'react'
 import TopTracks from './TopTracks';
+import Heading from './Heading';
 interface HomePageProps {
     session: any
+    timeRange: 'short_term' | 'medium_term' | 'long_term'
 }
 
 
 
-const HomePage: React.FC<HomePageProps> = ({session}) => {
-  const token = session.accessToken;
+const HomePage: React.FC<HomePageProps> = ({session, timeRange}) => {
   
+  useEffect(() => {
+    if(session){
+      console.log(session)
+    }
+    console.log(timeRange)
+  },[])
     return (
-    <>
-    <TopTracks session={session}/>
-        {/* <div className='flex h-[80vh] w-screen items-center justify-center'>
-          <div className='btn btn-primary' onClick={handleCLick}>FETCH DATA</div>
-          <div className="join">
-            <button className="join-item btn">1</button>
-            <button className="join-item btn btn-active">2</button>
-            <button className="join-item btn">3</button>
-            <button className="join-item btn">4</button>
-          </div>
-        </div> */}
-    </>
+    <div className='mt-10'>
+    <Heading title='Top Tracks' description='Your top tracks'/>
+    <TopTracks session={session} timeRange={timeRange}/>
+    </div>
   )
 }
 

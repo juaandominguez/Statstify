@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Pagination from '@mui/material/Pagination';
+import React, { useState, useEffect, use } from "react";
 
 interface TopTracksProps {
   session: any;
+  timeRange: "short_term" | "medium_term" | "long_term";
 }
 
-const TopTracks: React.FC<TopTracksProps> = ({ session }) => {
+const TopTracks: React.FC<TopTracksProps> = ({ session, timeRange }) => {
   const token = session.accessToken;
   const [topTracks, setTopTracks] = useState([]);
+  const [currentTopTracks, setCurrentTopTracks] = useState([]);
   const [page, setPage] = useState(1);
 
   async function fetchWebApi(endpoint: string, method: string, body?: string) {
@@ -23,7 +24,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ session }) => {
 
   async function getTopTracks() {
     const tracks = await fetchWebApi(
-      "v1/me/top/tracks?time_range=short_term&limit=50",
+      `v1/me/top/tracks?time_range=${timeRange}&limit=50`,
       "GET"
     );
     return tracks.items;
@@ -36,20 +37,34 @@ const TopTracks: React.FC<TopTracksProps> = ({ session }) => {
     }
     fetchTopTracks();
   }, []);
+  useEffect(() => {
+    async function fetchTopTracks() {
+      const tracks = await getTopTracks();
+      setTopTracks(tracks);
+    }
+    fetchTopTracks();
+  }, [timeRange]);
+  useEffect(() => {
+    if(!topTracks) return;
+    setCurrentTopTracks(topTracks.slice((page - 1) * 6, page*6));
+  }, [topTracks,page]);
 
   return (
-    <div className="flex flex-col items-center justify-center mt-10">
-      <h3 className="text-3xl">Top Tracks</h3>
-      <div className="mx-20 grid grid-cols-3 lg:grid-cols-5 gap-8 items-center border justify-center">
-        {topTracks && topTracks.map((track: any, index: number) => (
-            index < page*5 && index >= (page-1)*5 && (
-                <div key={track.id} className="flex flex-col my-10">
-                    <h5 className="text-center mb-4">{track.name}</h5>
-                    <img src={track.album.images[0].url} alt='No image'></img>
-                </div>
-            )
+    <div className="flex flex-col items-center justify-center mt-4">
+      <div className="mx-[10vw] grid grid-cols-3 md:grid-cols-6 gap-x-8">
+        {currentTopTracks && currentTopTracks.map((track: any, index) => (
+                <div key={track.id} className="flex flex-col mb-10 md:my-10 items-center justify-start">
+                <img src={track.album.images[0].url} alt='No image'></img>
+                <h5 className="text-center mt-4 text-white font-semibold">{`${index+(page-1)*6+1}. ${track.name}`}</h5>
+                <p className="text-center text-sm font-semibold max-h-[50px] overflow-hidden line-clamp-2" style={{ lineHeight: "25px", display: "-webkit-box", WebkitLineClamp: 2 }}>{track.artists.map((artist: any) => artist.name).join(", ")}</p>
+              </div>
+
         ))}
-        <Pagination count={10} variant="outlined" color="primary" onChange={() => setPage(page => page +1)}/>
+      </div>
+      <div className="join">
+          {topTracks && Array.from({length: topTracks.length/6 + 1}).map((_, i) => (
+            <button key={i} className={`join-item btn ${page === i+1 && 'btn-primary'}`} onClick={() => setPage(i+1)}>{i+1}</button>)
+          )}
       </div>
     </div>
   );
