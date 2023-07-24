@@ -11,12 +11,12 @@ interface HomePageProps {
 
 const HomePage: React.FC<HomePageProps> = ({session, timeRange}) => {
   
-  useEffect(() => {
-    if(session){
-      console.log(session)
-    }
-    console.log(timeRange)
-  },[])
+  // useEffect(() => {
+  //   if(session){
+  //     console.log(session)
+  //   }
+  //   console.log(timeRange)
+  // },[])
     return (
     <div className='mt-10'>
     <Heading title='Top Tracks' description='Your top tracks'/>
