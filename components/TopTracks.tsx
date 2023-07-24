@@ -1,4 +1,5 @@
 import React, { useState, useEffect, use } from "react";
+import getTopTracks from "@/utils/fetchWebapi";
 
 interface TopTracksProps {
   session: any;
@@ -11,35 +12,16 @@ const TopTracks: React.FC<TopTracksProps> = ({ session, timeRange }) => {
   const [currentTopTracks, setCurrentTopTracks] = useState([]);
   const [page, setPage] = useState<number>(1);
 
-  async function fetchWebApi(endpoint: string, method: string, body?: string) {
-    const res = await fetch(`https://api.spotify.com/${endpoint}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      method,
-      body: JSON.stringify(body),
-    });
-    return await res.json();
-  }
-
-  async function getTopTracks() {
-    const tracks = await fetchWebApi(
-      `v1/me/top/tracks?time_range=${timeRange}&limit=50`,
-      "GET"
-    );
-    return tracks.items;
-  }
-
   useEffect(() => {
     async function fetchTopTracks() {
-      const tracks = await getTopTracks();
+      const tracks = await getTopTracks(token, timeRange);
       setTopTracks(tracks);
     }
     fetchTopTracks();
   }, []);
   useEffect(() => {
     async function fetchTopTracks() {
-      const tracks = await getTopTracks();
+      const tracks = await getTopTracks(token, timeRange);
       setTopTracks(tracks);
     }
     fetchTopTracks();
@@ -76,7 +58,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ session, timeRange }) => {
       <div className={`mx-[10vw] grid grid-cols-3 lg:grid-cols-6 gap-x-8`}>
         {currentTopTracks && currentTopTracks.map((track: any, index) => (
                 <div key={track.id} className="flex flex-col mb-10 md:my-10 items-center justify-start">
-                <img src={track.album.images[0].url} alt='No image'></img>
+                <img src={track.album.images[0].url} alt='No image' onClick={() => {window.location = track.external_urls.spotify}} className="cursor-pointer"></img>
                 <h5 className="text-center mt-4 text-white font-semibold max-h-[50px] overflow-hidden line-clamp-2" style={{ lineHeight: "25px", display: "-webkit-box", WebkitLineClamp: 2 }}>{`${index+(page-1)*6+1}. ${track.name}`}</h5>
                 <p className="text-center text-sm font-semibold max-h-[50px] overflow-hidden line-clamp-2" style={{ lineHeight: "25px", display: "-webkit-box", WebkitLineClamp: 2 }}>{track.artists.map((artist: any) => artist.name).join(", ")}</p>
               </div>
