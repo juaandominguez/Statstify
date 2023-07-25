@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html{
+html {
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-div{
+div {
   border: 1px dotted red;
 }

@@ -28,9 +28,9 @@ const TopTracks: React.FC<TopTracksProps> = ({ session, timeRange }) => {
     setPage(1);
   }, [timeRange]);
   useEffect(() => {
-    if(!topTracks) return;
-    setCurrentTopTracks(topTracks.slice((page - 1) * 6, page*6));
-  }, [topTracks,page]);
+    if (!topTracks) return;
+    setCurrentTopTracks(topTracks.slice((page - 1) * 6, page * 6));
+  }, [topTracks, page]);
 
   const handlePrevPage = () => {
     if (page > 1) {
@@ -46,25 +46,78 @@ const TopTracks: React.FC<TopTracksProps> = ({ session, timeRange }) => {
 
   return (
     <>
-    <div className="flex justify-end mr-[12vw]">
-          {topTracks && (
-            <>
-            <button className={` btn ${page === 1 && 'btn-disabled'}`} onClick={handlePrevPage} disabled={page === 1}>Prev</button>
-            <button className={`btn ${page === Math.ceil(topTracks.length / 6) && 'btn-disabled'}`} onClick={handleNextPage} disabled={page === Math.ceil(topTracks.length / 6)}>Next</button>
+      <div className="mr-[12vw] flex justify-end">
+        {topTracks && (
+          <>
+            <button
+              className={` btn ${page === 1 && "btn-disabled"}`}
+              onClick={handlePrevPage}
+              disabled={page === 1}
+            >
+              Prev
+            </button>
+            <button
+              className={`btn ${page === Math.ceil(topTracks.length / 6) && "btn-disabled"
+                }`}
+              onClick={handleNextPage}
+              disabled={page === Math.ceil(topTracks.length / 6)}
+            >
+              Next
+            </button>
           </>
-          )}
+        )}
       </div>
-    <div className="flex flex-col items-center justify-center min-h-[50vh]">
-      <div className={`mx-[10vw] grid grid-cols-3 lg:grid-cols-6 gap-x-8`}>
-        {currentTopTracks && currentTopTracks.map((track: any, index) => (
-                <div key={track.id} className="flex flex-col mb-10 md:my-10 items-center justify-start">
-                <img src={track.album.images[0].url} alt='No image' onClick={() => {window.location = track.external_urls.spotify}} className="cursor-pointer"></img>
-                <h5 className="text-center mt-4 text-white font-semibold max-h-[50px] overflow-hidden line-clamp-2" style={{ lineHeight: "25px", display: "-webkit-box", WebkitLineClamp: 2 }}>{`${index+(page-1)*6+1}. ${track.name}`}</h5>
-                <p className="text-center text-sm font-semibold max-h-[50px] overflow-hidden line-clamp-2" style={{ lineHeight: "25px", display: "-webkit-box", WebkitLineClamp: 2 }}>{track.artists.map((artist: any) => artist.name).join(", ")}</p>
+      <div className="flex min-h-[50vh] flex-col items-center justify-center">
+        <div className={`mx-[10vw] grid grid-cols-3 gap-x-8 lg:grid-cols-6`}>
+          {currentTopTracks &&
+            currentTopTracks.map((track: any, index) => (
+              <div
+                key={track.id}
+                className="mb-10 flex flex-col items-center justify-start md:my-10"
+              >
+                <img
+                  src={track.album.images[0].url}
+                  alt="No image"
+                  onClick={() => {
+                    window.location = track.external_urls.spotify;
+                  }}
+                  className="cursor-pointer select-none"
+                ></img>
+                <h5
+                  className="mt-4 line-clamp-2 max-h-[50px] cursor-pointer overflow-hidden text-center font-semibold text-white"
+                  style={{
+                    lineHeight: "25px",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                  }}
+                  onClick={() => {
+                    window.location = track.external_urls.spotify;
+                  }}
+                >
+                  {`${index + (page - 1) * 6 + 1}. ${track.name}`}
+                </h5>
+                <p
+                  className="line-clamp-2 max-h-[50px] overflow-hidden text-center text-sm font-semibold"
+                  style={{
+                    lineHeight: "25px",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                  }}
+                >
+                  {track.artists.map((artist: any, index: number) => (
+                    <span
+                      onClick={() =>
+                        (window.location = artist.external_urls.href)
+                      }
+                      className="cursor-pointer hover:text-white"
+                    >{`${artist.name}${index !== track.artists.length - 1 ? ", " : ""
+                      }`}</span>
+                  ))}
+                </p>
               </div>
-        ))}
+            ))}
+        </div>
       </div>
-    </div>
     </>
   );
 };

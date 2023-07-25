@@ -1,17 +1,17 @@
-import React from 'react'
+import React from "react";
 
 interface HeadingProps {
-    title: string
-    description: string
+  title: string;
+  description: string;
 }
 
-const Heading: React.FC<HeadingProps> = ({title, description}) => {
+const Heading: React.FC<HeadingProps> = ({ title, description }) => {
   return (
-    <article className='mx-[10vw]'>
-        <h2 className='font-bold text-3xl text-white mb-1'>{title}</h2>
-        <h4 className='font-semibold'>{description}</h4>
+    <article className="mx-[10vw]">
+      <h2 className="mb-1 text-3xl font-bold text-white">{title}</h2>
+      <h4 className="font-semibold">{description}</h4>
     </article>
-  )
-}
+  );
+};
 
-export default Heading
+export default Heading;
