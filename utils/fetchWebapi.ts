@@ -1,3 +1,5 @@
+import { Spotify } from "./types";
+
 async function fetchWebApi(
   endpoint: string,
   method: string,
@@ -15,7 +17,7 @@ async function fetchWebApi(
 }
 
 async function getTopTracks(token: string, timeRange: string) {
-  const tracks = await fetchWebApi(
+  const tracks: Spotify = await fetchWebApi(
     `v1/me/top/tracks?time_range=${timeRange}&limit=50`,
     "GET",
     token,
