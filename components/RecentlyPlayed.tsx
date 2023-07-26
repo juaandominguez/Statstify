@@ -50,44 +50,47 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
             )}
             <div className="flex flex-row justify-between">
               <div className="flex">
-                <img
-                  src={item.track.album.images[2].url}
-                  className="cursor-pointer select-none"
-                  onClick={() => window.open(item.track.external_urls.spotify)}
-                ></img>
+                <a href={item.track.external_urls.spotify} target="_blank">
+                  <img
+                    src={item.track.album.images[2].url}
+                    className="cursor-pointer select-none"
+                  ></img>
+                </a>
                 <div className="ml-4 flex flex-col justify-center">
-                  <h4
-                    className="cursor-pointer font-bold text-white"
-                    onClick={() =>
-                      window.open(item.track.external_urls.spotify)
-                    }
-                  >
-                    {item.track.name}
-                  </h4>
+                  <a href={item.track.external_urls.spotify} target="_blank">
+                    <h4 className="cursor-pointer font-bold text-white">
+                      {item.track.name}
+                    </h4>
+                  </a>
                   <div className="flex flex-row">
-                    {item?.track?.artists?.map((artist, index) => (
-                      <p
-                        className="mr-1 cursor-pointer text-sm font-semibold hover:text-white"
-                        key={artist.id}
-                        onClick={() =>
-                          window.open(artist.external_urls.spotify)
-                        }
-                      >
-                        {`${artist.name}${
-                          index !== item.track.artists.length - 1 ? ", " : ""
-                        }`}
-                      </p>
-                    ))}
+                    <div
+                      className="flex flex-row overflow-hidden overflow-ellipsis"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 1,
+                        maxWidth: "50vw",
+                      }}
+                    >
+                      {item?.track?.artists?.map((artist, index) => (
+                        <a
+                          href={artist.external_urls.spotify}
+                          key={artist.id}
+                          className="mr-1 cursor-pointer text-sm font-semibold hover:text-white"
+                          target="_blank"
+                        >
+                          {`${artist.name}${
+                            index !== item.track.artists.length - 1 ? ", " : ""
+                          }`}
+                        </a>
+                      ))}
+                    </div>
                     <p className="ml-1 text-sm font-semibold">
                       •
-                      <span
-                        className="ml-1 cursor-pointer hover:text-white"
-                        onClick={() =>
-                          window.open(item.track.album.external_urls.spotify)
-                        }
-                      >
-                        {item.track.album.name}
-                      </span>
+                      <a href={item.track.album.external_urls.spotify}>
+                        <span className="ml-1 mr-3 cursor-pointer hover:text-white">
+                          {item.track.album.name}
+                        </span>
+                      </a>
                     </p>
                   </div>
                 </div>

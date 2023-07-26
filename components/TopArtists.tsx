@@ -62,27 +62,25 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
               key={artist.id}
               className="mb-10 flex flex-col items-center justify-start md:my-10"
             >
-              <img
-                src={artist.images[0].url}
-                alt="No image"
-                onClick={() => {
-                  window.open(artist.external_urls.spotify);
-                }}
-                className="cursor-pointer select-none"
-              ></img>
-              <h5
+              <a href={artist.external_urls.spotify} target="_blank">
+                <img
+                  src={artist.images[0].url}
+                  alt="No image"
+                  className="cursor-pointer select-none"
+                ></img>
+              </a>
+              <a
+                href={artist.external_urls.spotify}
+                target="_blank"
                 className="mt-4 line-clamp-2 max-h-[50px] cursor-pointer overflow-hidden text-center font-semibold text-white"
                 style={{
                   lineHeight: "25px",
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                 }}
-                onClick={() => {
-                  window.open(artist.external_urls.spotify);
-                }}
               >
                 {`${index + (page - 1) * 6 + 1}. ${artist.name}`}
-              </h5>
+              </a>
             </div>
           ))}
         </div>

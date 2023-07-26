@@ -91,6 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({
               <a
                 className="justify-between"
                 href="https://www.spotify.com/es/account/overview/"
+                target="_blank"
               >
                 Profile
               </a>

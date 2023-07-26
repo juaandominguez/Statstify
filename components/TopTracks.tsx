@@ -60,27 +60,25 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
               key={track.id}
               className="mb-10 flex flex-col items-center justify-start md:my-10"
             >
-              <img
-                src={track.album.images[0].url}
-                alt="No image"
-                onClick={() => {
-                  window.open(track.external_urls.spotify);
-                }}
-                className="cursor-pointer select-none"
-              ></img>
-              <h5
+              <a href={track.external_urls.spotify} target="_blank">
+                <img
+                  src={track.album.images[0].url}
+                  alt="No image"
+                  className="cursor-pointer select-none"
+                ></img>
+              </a>
+              <a
+                href={track.external_urls.spotify}
+                target="_blank"
                 className="mt-4 line-clamp-2 max-h-[50px] cursor-pointer overflow-hidden text-center font-semibold text-white"
                 style={{
                   lineHeight: "25px",
                   display: "-webkit-box",
                   WebkitLineClamp: 2,
                 }}
-                onClick={() => {
-                  window.open(track.external_urls.spotify);
-                }}
               >
                 {`${index + (page - 1) * 6 + 1}. ${track.name}`}
-              </h5>
+              </a>
               <p
                 className="line-clamp-2 max-h-[50px] overflow-hidden text-center text-sm font-semibold"
                 style={{
@@ -90,13 +88,14 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                 }}
               >
                 {track?.artists?.map((artist: Artist, index: number) => (
-                  <span
+                  <a
+                    href={artist.external_urls.spotify}
+                    target="_blank"
                     key={artist.id}
-                    onClick={() => window.open(artist.external_urls.spotify)}
                     className="cursor-pointer hover:text-white"
                   >{`${artist.name}${
                     index !== track.artists.length - 1 ? ", " : ""
-                  }`}</span>
+                  }`}</a>
                 ))}
               </p>
             </div>
