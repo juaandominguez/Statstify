@@ -1,5 +1,3 @@
-import axios from "axios";
-import { Track, SpecificArtist } from "./types";
 import { TrackCall, ArtistCall, RecentlyPlayedCall } from "./types";
 import { TimeRange } from "./types";
 async function fetchWebApi(
@@ -44,25 +42,5 @@ async function getRecentlyPlayed(token: string) {
   );
   return tracks.items;
 }
-
-// async function getTopTracksApi(timeRange: TimeRange) {
-//   let res: Track[] = []
-//   try {
-//     res = await axios(`http://localhost:3000/api/topTracks/${timeRange}`)
-//   }
-//   finally {
-//     return res;
-//   }
-// }
-
-// async function getTopArtistsApi(timeRange: TimeRange) {
-//   let res: SpecificArtist[] = []
-//   try {
-//     res = await axios(`http://localhost:3000/api/topArtists/${timeRange}`)
-//   }
-//   finally {
-//     return res;
-//   }
-// }
 
 export { getTopTracks, getTopArtists, getRecentlyPlayed };
