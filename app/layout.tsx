@@ -10,8 +10,8 @@ export const metadata = {
   ogType: "website",
   ogTitle: "Statify",
   ogDescription: "Check your spotify stats with Statify",
-  ogUrl: "https://statify.vercel.app",
-  image: "https://statify.vercel.app/og.png",
+  ogUrl: "https://statify-juaandominguez.vercel.app/",
+  image: "https://statify-juaandominguez.vercel.app//og.png",
 };
 
 export default function RootLayout({
