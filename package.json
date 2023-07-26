@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install",
+    "lint:write": "next lint --cache --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -31,7 +33,12 @@
   "devDependencies": {
     "daisyui": "^3.3.1",
     "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.3.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
   }
 }
