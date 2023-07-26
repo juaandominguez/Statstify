@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { Artist, Track } from "@/utils/types";
 interface TopTracksProps {
   topTracks: Track[];
@@ -29,11 +29,11 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
 
   return (
     <>
-      <div className="mr-[12vw] flex justify-end">
+      <div className="mr-[12vw] mt-2 flex justify-end">
         {topTracks && (
           <>
             <button
-              className={` btn ${page === 1 && "btn-disabled"}`}
+              className={` btn mr-3 ${page === 1 && "btn-disabled"}`}
               onClick={handlePrevPage}
               disabled={page === 1}
             >
@@ -51,8 +51,10 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
           </>
         )}
       </div>
-      <div className="flex min-h-[50vh] flex-col items-center justify-center">
-        <div className={`mx-[10vw] grid grid-cols-3 gap-x-8 lg:grid-cols-6`}>
+      <div className="mt-4 flex min-h-[50vh] flex-col items-center justify-center">
+        <div
+          className={`mx-[10vw] grid grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-6`}
+        >
           {currentTopTracks?.map((track, index) => (
             <div
               key={track.id}
@@ -62,7 +64,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                 src={track.album.images[0].url}
                 alt="No image"
                 onClick={() => {
-                  window.location.href = track.external_urls.spotify;
+                  window.open(track.external_urls.spotify);
                 }}
                 className="cursor-pointer select-none"
               ></img>
@@ -74,7 +76,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                   WebkitLineClamp: 2,
                 }}
                 onClick={() => {
-                  window.location.href = track.external_urls.spotify;
+                  window.open(track.external_urls.spotify);
                 }}
               >
                 {`${index + (page - 1) * 6 + 1}. ${track.name}`}
@@ -90,9 +92,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                 {track?.artists?.map((artist: Artist, index: number) => (
                   <span
                     key={artist.id}
-                    onClick={() =>
-                      (window.location.href = artist.external_urls.spotify)
-                    }
+                    onClick={() => window.open(artist.external_urls.spotify)}
                     className="cursor-pointer hover:text-white"
                   >{`${artist.name}${
                     index !== track.artists.length - 1 ? ", " : ""

@@ -1,11 +1,12 @@
 import axios from "axios";
-import { TrackCall, ArtistCall, SpecificArtist, Track, RecentlyPlayedCall } from "./types";
+import { Track, SpecificArtist } from "./types";
+import { TrackCall, ArtistCall, RecentlyPlayedCall } from "./types";
 import { TimeRange } from "./types";
 async function fetchWebApi(
   endpoint: string,
   method: string,
   token: string,
-  body?: string,
+  body?: string
 ) {
   const res = await fetch(`https://api.spotify.com/${endpoint}`, {
     headers: {
@@ -21,7 +22,7 @@ async function getTopTracks(token: string, timeRange: TimeRange) {
   const tracks: TrackCall = await fetchWebApi(
     `v1/me/top/tracks?time_range=${timeRange}&limit=50`,
     "GET",
-    token,
+    token
   );
   return tracks.items;
 }
@@ -30,7 +31,7 @@ async function getTopArtists(token: string, timeRange: TimeRange) {
   const artists: ArtistCall = await fetchWebApi(
     `v1/me/top/artists?time_range=${timeRange}&limit=50`,
     "GET",
-    token,
+    token
   );
   return artists.items;
 }
@@ -39,12 +40,12 @@ async function getRecentlyPlayed(token: string) {
   const tracks: RecentlyPlayedCall = await fetchWebApi(
     `v1/me/player/recently-played?limit=50`,
     "GET",
-    token,
+    token
   );
   return tracks.items;
 }
 
-// async function getTopTracks(timeRange: TimeRange) {
+// async function getTopTracksApi(timeRange: TimeRange) {
 //   let res: Track[] = []
 //   try {
 //     res = await axios(`http://localhost:3000/api/topTracks/${timeRange}`)
@@ -54,7 +55,7 @@ async function getRecentlyPlayed(token: string) {
 //   }
 // }
 
-// async function getTopArtists(timeRange: TimeRange) {
+// async function getTopArtistsApi(timeRange: TimeRange) {
 //   let res: SpecificArtist[] = []
 //   try {
 //     res = await axios(`http://localhost:3000/api/topArtists/${timeRange}`)
@@ -65,4 +66,3 @@ async function getRecentlyPlayed(token: string) {
 // }
 
 export { getTopTracks, getTopArtists, getRecentlyPlayed };
-

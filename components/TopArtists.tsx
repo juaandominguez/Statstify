@@ -31,11 +31,11 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
 
   return (
     <>
-      <div className="mr-[12vw] flex justify-end">
+      <div className="mr-[12vw] mt-2 flex justify-end">
         {topArtists && (
           <>
             <button
-              className={` btn ${page === 1 && "btn-disabled"}`}
+              className={`btn mr-3 ${page === 1 && "btn-disabled"}`}
               onClick={handlePrevPage}
               disabled={page === 1}
             >
@@ -53,8 +53,10 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
           </>
         )}
       </div>
-      <div className="flex min-h-[50vh] flex-col items-center justify-center">
-        <div className={`mx-[10vw] grid grid-cols-3 gap-x-8 lg:grid-cols-6`}>
+      <div className="mt-4 flex min-h-[50vh] flex-col items-center justify-center">
+        <div
+          className={`mx-[10vw] grid grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-6`}
+        >
           {currentTopArtists?.map((artist, index) => (
             <div
               key={artist.id}
@@ -64,7 +66,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
                 src={artist.images[0].url}
                 alt="No image"
                 onClick={() => {
-                  window.location.href = artist.external_urls.spotify;
+                  window.open(artist.external_urls.spotify);
                 }}
                 className="cursor-pointer select-none"
               ></img>
@@ -76,7 +78,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
                   WebkitLineClamp: 2,
                 }}
                 onClick={() => {
-                  window.location.href = artist.external_urls.spotify;
+                  window.open(artist.external_urls.spotify);
                 }}
               >
                 {`${index + (page - 1) * 6 + 1}. ${artist.name}`}

@@ -1,16 +1,20 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopTracks from "./TopTracks";
 import Heading from "./Heading";
 import TopGenres from "./TopGenres";
 import { Item, SpecificArtist, Track } from "@/utils/types";
 import TopArtists from "./TopArtists";
 import RecentlyPlayed from "./RecentlyPlayed";
-import { getTopTracks, getTopArtists, getRecentlyPlayed } from "@/utils/fetchWebapi";
+import {
+  getRecentlyPlayed,
+  getTopTracks,
+  getTopArtists,
+} from "@/utils/fetchWebapi";
 import { TimeRange } from "@/utils/types";
 interface HomePageProps {
   session: any;
-  timeRange: TimeRange
+  timeRange: TimeRange;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
@@ -38,42 +42,45 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
   }, [timeRange]);
   useEffect(() => {
     fetchRecentTracks();
-  }, [])
+  }, []);
 
   return (
     <div className="mt-10">
       <Heading
         title="Top Tracks"
-        description={`Your top tracks ${timeRange === "short_term"
-          ? "of the last month"
-          : timeRange === "medium_term"
+        description={`Your top tracks ${
+          timeRange === "short_term"
+            ? "of the last month"
+            : timeRange === "medium_term"
             ? "of the last 6 months"
             : ""
-          }`}
+        }`}
       />
       <TopTracks topTracks={topTracks} />
       <Heading
         title="Top Genres"
-        description={`Your top genres ${timeRange === "short_term"
-          ? "of the last month"
-          : timeRange === "medium_term"
+        description={`Your top genres ${
+          timeRange === "short_term"
+            ? "of the last month"
+            : timeRange === "medium_term"
             ? "of the last 6 months"
             : ""
-          }`}
+        }`}
       />
       <TopGenres topArtists={topArtists} />
       <Heading
         title="Top Artists"
-        description={`Your top artists ${timeRange === "short_term"
-          ? "of the last month"
-          : timeRange === "medium_term"
+        description={`Your top artists ${
+          timeRange === "short_term"
+            ? "of the last month"
+            : timeRange === "medium_term"
             ? "of the last 6 months"
             : ""
-          }`}
+        }`}
       />
       <TopArtists topArtists={topArtists} />
       <Heading
-        title="Recently Played songs"
+        title="Recent Streams"
         description={`Your recently played songs`}
       />
       <RecentlyPlayed recentTracks={recentTracks} />

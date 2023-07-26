@@ -1,9 +1,9 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import spotify from "../public/assets/spotify.svg";
-
-type TimeRange = "short_term" | "medium_term" | "long_term";
+import { TimeRange } from "@/utils/types";
 
 interface NavbarProps {
   session: any;
@@ -31,7 +31,10 @@ const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <div className="navbar bg-base-100">
-        <div className="ml-10 flex-1">
+        <div
+          className="ml-10 flex-1"
+          onClick={() => (window.location.href = "/")}
+        >
           <a className="btn-ghost btn flex text-xl normal-case text-primary">
             SpotiWrapped{" "}
             <img
@@ -92,7 +95,6 @@ const Navbar: React.FC<NavbarProps> = ({
                 Profile
               </a>
             </li>
-            {/* <li><a>Settings</a></li> */}
             <li>
               <a onClick={handleLogout}>Logout</a>
             </li>
@@ -102,17 +104,6 @@ const Navbar: React.FC<NavbarProps> = ({
           </ul>
         </div>
       </div>
-      {isModalOpen && (
-        <dialog id="my_modal_2" className="modal absolute left-0 top-0">
-          <form method="dialog" className="modal-box">
-            <h3 className="text-lg font-bold">Hello!</h3>
-            <p className="py-4">Press ESC key or click outside to close</p>
-          </form>
-          <form method="dialog" className="modal-backdrop">
-            <button onClick={() => setIsModalOpen(false)}>Close</button>
-          </form>
-        </dialog>
-      )}
     </>
   );
 };
