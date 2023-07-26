@@ -17,7 +17,6 @@ const Navbar: React.FC<NavbarProps> = ({
   handleChange,
 }) => {
   const [checked, setChecked] = useState<TimeRange>(timeRange);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };
@@ -27,6 +26,11 @@ const Navbar: React.FC<NavbarProps> = ({
   const handleClick = (value: TimeRange) => {
     changeCheck(value);
     handleChange(value);
+  };
+  const iterateTimeRange = (value: TimeRange) => {
+    if (value === "short_term") handleClick("medium_term");
+    else if (value === "medium_term") handleClick("long_term");
+    else handleClick("short_term");
   };
   return (
     <>
@@ -100,7 +104,9 @@ const Navbar: React.FC<NavbarProps> = ({
               <a onClick={handleLogout}>Logout</a>
             </li>
             <li>
-              <a onClick={() => setIsModalOpen(true)}>Change Time interval</a>
+              <a onClick={() => iterateTimeRange(timeRange)}>
+                Iterate Time interval
+              </a>
             </li>
           </ul>
         </div>

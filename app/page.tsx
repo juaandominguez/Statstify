@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 import HomePage from "@/components/HomePage";
 import { TimeRange } from "@/utils/types";
 
-
 export default function Home() {
   const [timeRange, setTimeRange] = useState<TimeRange>("short_term");
   const { data: session, status } = useSession();
