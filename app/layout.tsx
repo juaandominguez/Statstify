@@ -5,13 +5,13 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Statify",
-  description: "Check your spotify stats with Statify",
+  title: "Statstify",
+  description: "Check your spotify stats with Statstify",
   ogType: "website",
-  ogTitle: "Statify",
-  ogDescription: "Check your spotify stats with Statify",
-  ogUrl: "https://statify-juaandominguez.vercel.app/",
-  image: "https://statify-juaandominguez.vercel.app//og.png",
+  ogTitle: "Statstify",
+  ogDescription: "Check your spotify stats with Statstify",
+  ogUrl: "https://statstify.vercel.app/",
+  image: "https://statstify.vercel.app//og.png",
 };
 
 export default function RootLayout({
