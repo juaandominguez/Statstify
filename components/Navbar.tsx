@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({
           onClick={() => (window.location.href = "/")}
         >
           <a className="btn-ghost btn flex text-xl normal-case text-primary">
-            SpotiWrapped{" "}
+            Statify{" "}
             <img
               src={spotify.src}
               alt="Spotify"

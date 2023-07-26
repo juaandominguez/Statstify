@@ -4,11 +4,9 @@ import spotify from "@/public/assets/spotify.svg";
 import spotifyhover from "@/public/assets/spotifyhover.svg";
 import divbg from "@/public/assets/divbg.png";
 import { signIn } from "next-auth/react";
-import gif from "@/public/assets/scrollDown.gif";
 
 const h1Style =
   "text-7xl xl:text-8xl font-bold md:text-left text-center text-white";
-const subtitleStyle = "text-xl text-center text-white";
 const MainScreen = () => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -30,7 +28,7 @@ const MainScreen = () => {
         <h1 className={h1Style}>
           Your{" "}
           <span className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
-            Wrapped
+            Stats
           </span>
         </h1>
       </div>
