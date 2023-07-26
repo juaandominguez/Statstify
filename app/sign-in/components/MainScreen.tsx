@@ -36,7 +36,7 @@ const MainScreen = () => {
       </div>
       {/* <h4 className={subtitleStyle}>See your Spotify stats here!</h4> */}
       <button
-        className="btn btn-outline text-xl"
+        className="btn-outline btn text-xl"
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
         onClick={handleCLick}

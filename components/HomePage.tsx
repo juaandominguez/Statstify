@@ -3,30 +3,33 @@ import React, { useEffect, useState } from "react";
 import TopTracks from "./TopTracks";
 import Heading from "./Heading";
 import TopGenres from "./TopGenres";
-import getTopTracks from "@/utils/fetchWebapi";
-import { Track } from "@/utils/types";
+import { SpecificArtist, Track } from "@/utils/types";
+import TopArtists from "./TopArtists";
+import RecentlyPlayed from "./RecentlyPlayed";
+import { getTopTracks, getTopArtists } from "@/utils/fetchWebapi";
+import { TimeRange } from "@/utils/types";
 interface HomePageProps {
   session: any;
-  timeRange: "short_term" | "medium_term" | "long_term";
+  timeRange: TimeRange
 }
 
 const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
   const token = session.accessToken;
   const [topTracks, setTopTracks] = useState<Track[]>([]);
-  useEffect(() => {
-    async function fetchTopTracks() {
-      const tracks = await getTopTracks(token, timeRange);
-      setTopTracks(tracks);
-    }
-    fetchTopTracks();
-  }, []);
+  const [topArtists, setTopArtists] = useState<SpecificArtist[]>([]);
+
+  async function fetchTopTracks() {
+    const tracks = await getTopTracks(token, timeRange);
+    setTopTracks(tracks);
+  }
+  async function fetchTopArtists() {
+    const tracks = await getTopArtists(token, timeRange);
+    setTopArtists(tracks);
+  }
 
   useEffect(() => {
-    async function fetchTopTracks() {
-      const tracks = await getTopTracks(token, timeRange);
-      setTopTracks(tracks);
-    }
     fetchTopTracks();
+    fetchTopArtists();
   }, [timeRange]);
 
   return (
@@ -50,7 +53,22 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
             : ""
           }`}
       />
-      <TopGenres topTracks={topTracks} session={session} />
+      <TopGenres topArtists={topArtists} />
+      <Heading
+        title="Top Artists"
+        description={`Your top artists ${timeRange === "short_term"
+          ? "of the last month"
+          : timeRange === "medium_term"
+            ? "of the last 6 months"
+            : ""
+          }`}
+      />
+      <TopArtists topArtists={topArtists} />
+      <Heading
+        title="Recently Played songs"
+        description={`Your recently played songs`}
+      />
+      <RecentlyPlayed />
     </div>
   );
 };

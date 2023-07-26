@@ -1,5 +1,4 @@
 import React, { useState, useEffect, use } from "react";
-import getTopTracks from "@/utils/fetchWebapi";
 import { Artist, Track } from "@/utils/types";
 interface TopTracksProps {
   topTracks: Track[];
@@ -10,7 +9,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
   const [page, setPage] = useState<number>(1);
   useEffect(() => {
     setPage(1);
-  }, [topTracks])
+  }, [topTracks]);
   useEffect(() => {
     if (!topTracks) return;
     setCurrentTopTracks(topTracks.slice((page - 1) * 6, page * 6));
@@ -41,8 +40,9 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
               Prev
             </button>
             <button
-              className={`btn ${page === Math.ceil(topTracks.length / 6) && "btn-disabled"
-                }`}
+              className={`btn ${
+                page === Math.ceil(topTracks.length / 6) && "btn-disabled"
+              }`}
               onClick={handleNextPage}
               disabled={page === Math.ceil(topTracks.length / 6)}
             >
@@ -88,13 +88,15 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                 }}
               >
                 {track?.artists?.map((artist: Artist, index: number) => (
-                  <span key={artist.id}
+                  <span
+                    key={artist.id}
                     onClick={() =>
                       (window.location.href = artist.external_urls.spotify)
                     }
                     className="cursor-pointer hover:text-white"
-                  >{`${artist.name}${index !== track.artists.length - 1 ? ", " : ""
-                    }`}</span>
+                  >{`${artist.name}${
+                    index !== track.artists.length - 1 ? ", " : ""
+                  }`}</span>
                 ))}
               </p>
             </div>

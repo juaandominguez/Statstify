@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({
     <>
       <div className="navbar bg-base-100">
         <div className="ml-10 flex-1">
-          <a className="btn btn-ghost flex text-xl normal-case text-primary">
+          <a className="btn-ghost btn flex text-xl normal-case text-primary">
             SpotiWrapped{" "}
             <img
               src={spotify.src}
@@ -69,8 +69,8 @@ const Navbar: React.FC<NavbarProps> = ({
             onChange={() => handleClick("long_term")}
           />
         </div>
-        <div className="dropdown dropdown-end mr-10">
-          <label tabIndex={0} className="avatar btn btn-circle btn-ghost">
+        <div className="dropdown-end dropdown mr-10">
+          <label tabIndex={0} className="btn-ghost btn-circle avatar btn">
             <div className="w-10 rounded-full">
               <Image
                 src={session.user.image}
@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({
           </label>
           <ul
             tabIndex={0}
-            className="menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow"
+            className="dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow"
           >
             <li>
               <a

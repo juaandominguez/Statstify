@@ -1,56 +1,49 @@
-"use client"
-import { SpecificTrack, Track } from "@/utils/types";
-import { access } from "fs";
+"use client";
+import { SpecificArtist, SpecificTrack, Track } from "@/utils/types";
 import React, { useState, useEffect } from "react";
 
 interface TopGenreProps {
-  topTracks: Track[];
-  session: any;
+  topArtists: SpecificArtist[];
 }
 interface Genre {
   name: string;
   count: number;
 }
 
-const TopGenres: React.FC<TopGenreProps> = ({ topTracks, session }) => {
+const TopGenres: React.FC<TopGenreProps> = ({ topArtists }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
-  const getTopGenres = async () => {
-    try {
-      const genres: Genre[] = [];
-      await Promise.all(
-        topTracks?.map(async (track) => {
-          const res = await fetch(`https://api.spotify.com/v1/tracks/${track.id}?access_token=${session.accessToken}`)
-          const data: SpecificTrack = await res.json();
-          data?.album?.genres?.map((genre) => {
-            const index = genres.findIndex((g) => (g.name === genre))
-            if (index === -1) {
-              genres.push({ name: genre, count: 1 });
-            }
-            else {
-              genres[index].count++;
-            }
-          })
-        })
-      )
+  const getTopGenres = () => {
+    const genres: Genre[] = [];
+    {
+      topArtists?.map((artist) => {
+        artist.genres?.map((genre) => {
+          const index = genres.findIndex((g) => g.name === genre);
+          if (index === -1) {
+            genres.push({ name: genre, count: 1 });
+          } else {
+            genres[index].count++;
+          }
+        });
+      });
     }
-    catch {
-      console.log("TopGenres error fetch")
-    }
-    finally {
-      return genres;
-    }
-  }
-  useEffect(() => {
-    getTopGenres().then((res) => {
-      console.log(res)
-      setGenres(res)
+    genres.sort((a, b) => {
+      return a.count > b.count ? -1 : 1;
     });
-  }, [topTracks]);
+    return genres;
+  };
+  useEffect(() => {
+    setGenres(getTopGenres());
+  }, [topArtists]);
 
   return (
-    <div className="flex w-full flex-grow flex-row overflow-x-scroll">
-      {genres?.map((genre) => (
-        <div key={genre.name}>{genre.name}</div>
+    <div className="mt-6 flex w-full flex-grow flex-row items-center overflow-x-scroll px-12">
+      {genres.map((genre) => (
+        <div
+          key={genre.name}
+          className="btn mx-3 rounded-full px-5 py-3 font-semibold"
+        >
+          {genre.name}
+        </div>
       ))}
     </div>
   );
