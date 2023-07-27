@@ -13,12 +13,14 @@ To install and run Statstify locally, follow these steps:
 
 Before running the project, make sure to create a `.env` file in the root directory with the following variables:
 
-`SPOTIFY_BASE_API_URL
-SPOTIFY_CLIENT_ID
-SPOTIFY_CLIENT_SECRET
-NEXTAUTH_SECRET
-NEXTAUTH_URL
-NEXT_URL`
+| .env |
+| ------ | ------ |
+| SPOTIFY_BASE_API_URL |
+| SPOTIFY_CLIENT_ID |
+| SPOTIFY_CLIENT_SECRET |
+| NEXTAUTH_SECRET |
+| NEXTAUTH_URL |
+| NEXT_URL |
 
 ## Features and Functionality
 
