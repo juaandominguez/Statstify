@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
-import spotify from "../public/assets/spotify.svg";
+import icon from "../public/assets/icon.png";
 import { TimeRange } from "@/utils/types";
 
 interface NavbarProps {
@@ -42,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({
           <a className="btn-ghost btn flex text-xl normal-case text-primary">
             Statstify{" "}
             <img
-              src={spotify.src}
+              src={icon.src}
               alt="Spotify"
               height={30}
               width={30}
