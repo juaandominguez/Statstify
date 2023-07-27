@@ -34,6 +34,14 @@ export default function RootLayout({
           property="og:image"
           content="https://statstify.vercel.app/og.png"
         />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image"
+          content="https://statstify.vercel.app/og_smaller.png"
+        />
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="statstify.vercel.app" />
         <meta property="twitter:url" content="https://statstify.vercel.app" />
