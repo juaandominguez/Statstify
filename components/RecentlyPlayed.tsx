@@ -62,13 +62,12 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                       {item.track.name}
                     </h4>
                   </a>
-                  <div className="flex flex-row">
+                  <div className="flex flex-row items-end">
                     <div
-                      className="flex flex-row overflow-hidden overflow-ellipsis"
+                      className="line-clamp-1 flex w-[120px] flex-row overflow-hidden overflow-ellipsis sm:w-[30vw] lg:w-auto"
                       style={{
                         display: "-webkit-box",
                         WebkitLineClamp: 1,
-                        maxWidth: "50vw",
                       }}
                     >
                       {item?.track?.artists?.map((artist, index) => (
@@ -84,14 +83,18 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                         </a>
                       ))}
                     </div>
-                    <p className="ml-1 text-sm font-semibold">
-                      •
-                      <a href={item.track.album.external_urls.spotify}>
-                        <span className="ml-1 mr-3 cursor-pointer hover:text-white">
-                          {item.track.album.name}
-                        </span>
-                      </a>
-                    </p>
+                    <a
+                      href={item.track.album.external_urls.spotify}
+                      target="_blank"
+                      className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold hover:text-white"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 1,
+                        minWidth: "30px",
+                      }}
+                    >
+                      • {item.track.album.name}
+                    </a>
                   </div>
                 </div>
               </div>

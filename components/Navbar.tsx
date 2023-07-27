@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarProps> = ({
     <>
       <div className="navbar bg-base-100">
         <div
-          className="ml-10 flex-1"
+          className="ml-4 flex-1"
           onClick={() => (window.location.href = "/")}
         >
           <a className="btn-ghost btn flex text-xl normal-case text-primary">
