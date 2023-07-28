@@ -1,5 +1,5 @@
 "use client";
-import { SpecificArtist, SpecificTrack, Track } from "@/utils/types";
+import { SpecificArtist } from "@/utils/types";
 import React, { useState, useEffect } from "react";
 
 interface TopGenreProps {
@@ -12,26 +12,26 @@ interface Genre {
 
 const TopGenres: React.FC<TopGenreProps> = ({ topArtists }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
-  const getTopGenres = () => {
-    const genres: Genre[] = [];
-    {
-      topArtists?.map((artist) => {
-        artist.genres?.map((genre) => {
-          const index = genres.findIndex((g) => g.name === genre);
-          if (index === -1) {
-            genres.push({ name: genre, count: 1 });
-          } else {
-            genres[index].count++;
-          }
-        });
-      });
-    }
-    genres.sort((a, b) => {
-      return a.count > b.count ? -1 : 1;
-    });
-    return genres;
-  };
   useEffect(() => {
+    const getTopGenres = () => {
+      const genres: Genre[] = [];
+      {
+        topArtists?.map((artist) => {
+          artist.genres?.map((genre) => {
+            const index = genres.findIndex((g) => g.name === genre);
+            if (index === -1) {
+              genres.push({ name: genre, count: 1 });
+            } else {
+              genres[index].count++;
+            }
+          });
+        });
+      }
+      genres.sort((a, b) => {
+        return a.count > b.count ? -1 : 1;
+      });
+      return genres;
+    };
     setGenres(getTopGenres());
   }, [topArtists]);
 

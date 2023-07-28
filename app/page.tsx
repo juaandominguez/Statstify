@@ -1,10 +1,10 @@
 "use client";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import { redirect } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { useSession } from "next-auth/react";
 import HomePage from "@/components/HomePage";
-import { TimeRange } from "@/utils/types";
+import { Session, TimeRange } from "@/utils/types";
 
 export default function Home() {
   const [timeRange, setTimeRange] = useState<TimeRange>("short_term");
@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       <Navbar
-        session={session}
+        session={session as Session}
         timeRange={timeRange}
         handleChange={setTimeRange}
       />

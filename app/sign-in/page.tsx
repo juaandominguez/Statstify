@@ -4,7 +4,7 @@ import MainScreen from "./components/MainScreen";
 import { redirect } from "next/navigation";
 
 const Page = () => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   if (status === "authenticated") redirect("/");
   if (status === "loading") {
     return (

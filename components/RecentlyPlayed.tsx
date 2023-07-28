@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Item, Track } from "@/utils/types";
+import { Item } from "@/utils/types";
 import formatDate from "@/utils/formatDate";
 interface RecentlyPlayedProps {
   recentTracks: Item[];
@@ -25,10 +25,10 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
     } else if (daysAgo === 1) {
       return "Yesterday";
     } else if (daysAgo > 365) {
-      let years = Math.floor(daysAgo / 365);
+      const years = Math.floor(daysAgo / 365);
       return years === 1 ? "1 year ago" : `${years} years ago`;
     } else if (daysAgo > 30) {
-      let years = Math.floor(daysAgo / 30);
+      const years = Math.floor(daysAgo / 30);
       return years === 1 ? "1 year ago" : `${years} years ago`;
     } else {
       return `${daysAgo} days ago`;

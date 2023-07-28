@@ -6,6 +6,7 @@ import TopGenres from "./TopGenres";
 import { Item, SpecificArtist, Track } from "@/utils/types";
 import TopArtists from "./TopArtists";
 import RecentlyPlayed from "./RecentlyPlayed";
+import { Session } from "@/utils/types";
 import {
   getRecentlyPlayed,
   getTopTracks,
@@ -23,26 +24,25 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
   const [topArtists, setTopArtists] = useState<SpecificArtist[]>([]);
   const [recentTracks, setTracks] = useState<Item[]>([]);
 
-  async function fetchTopTracks() {
-    const tracks = await getTopTracks(token, timeRange);
-    setTopTracks(tracks);
-  }
-  async function fetchTopArtists() {
-    const tracks = await getTopArtists(token, timeRange);
-    setTopArtists(tracks);
-  }
-  async function fetchRecentTracks() {
-    const tracks = await getRecentlyPlayed(token);
-    setTracks(tracks);
-  }
-
   useEffect(() => {
+    async function fetchTopTracks() {
+      const tracks = await getTopTracks(token, timeRange);
+      setTopTracks(tracks);
+    }
+    async function fetchTopArtists() {
+      const tracks = await getTopArtists(token, timeRange);
+      setTopArtists(tracks);
+    }
     fetchTopTracks();
     fetchTopArtists();
-  }, [timeRange]);
+  }, [timeRange, token]);
   useEffect(() => {
+    async function fetchRecentTracks() {
+      const tracks = await getRecentlyPlayed(token);
+      setTracks(tracks);
+    }
     fetchRecentTracks();
-  }, []);
+  }, [token]);
 
   return (
     <div className="mt-10">
