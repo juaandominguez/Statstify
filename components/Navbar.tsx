@@ -41,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({
         >
           <a className="btn-ghost btn flex text-xl normal-case text-primary">
             Statstify{" "}
-            <img
+            <Image
               src={icon.src}
               alt="Spotify"
               height={30}
@@ -101,12 +101,12 @@ const Navbar: React.FC<NavbarProps> = ({
               </a>
             </li>
             <li>
-              <a onClick={handleLogout}>Logout</a>
-            </li>
-            <li>
               <a onClick={() => iterateTimeRange(timeRange)}>
                 Iterate Time interval
               </a>
+            </li>
+            <li>
+              <a onClick={handleLogout}>Logout</a>
             </li>
           </ul>
         </div>

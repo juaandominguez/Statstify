@@ -4,6 +4,7 @@ import spotify from "@/public/assets/spotify.svg";
 import spotifyhover from "@/public/assets/spotifyhover.svg";
 import divbg from "@/public/assets/divbg.png";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 
 const h1Style =
   "text-7xl xl:text-8xl font-bold md:text-left text-center text-white";
@@ -42,16 +43,20 @@ const MainScreen = () => {
         Sign in using Spotify
         <div className="inline">
           {isHovered ? (
-            <img
+            <Image
               src={spotifyhover.src}
               alt="Spotify logo"
               className="h-6 w-6 transition duration-1000"
+              width={24}
+              height={24}
             />
           ) : (
-            <img
+            <Image
               src={spotify.src}
               alt="Spotify logo"
               className="h-6 w-6 transition duration-1000"
+              width={24}
+              height={24}
             />
           )}
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Artist, Track } from "@/utils/types";
+import Image from "next/image";
 interface TopTracksProps {
   topTracks: Track[];
 }
@@ -61,11 +62,13 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
               className="mb-10 flex flex-col items-center justify-start md:my-10"
             >
               <a href={track.external_urls.spotify} target="_blank">
-                <img
+                <Image
                   src={track.album.images[0].url}
                   alt="No image"
                   className="cursor-pointer select-none"
-                ></img>
+                  width={track.album.images[0].width}
+                  height={track.album.images[0].height}
+                />
               </a>
               <a
                 href={track.external_urls.spotify}

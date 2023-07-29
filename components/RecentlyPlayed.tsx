@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Item } from "@/utils/types";
 import formatDate from "@/utils/formatDate";
+import Image from "next/image";
 interface RecentlyPlayedProps {
   recentTracks: Item[];
 }
@@ -51,10 +52,13 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
             <div className="flex flex-row justify-between">
               <div className="flex">
                 <a href={item.track.external_urls.spotify} target="_blank">
-                  <img
+                  <Image
                     src={item.track.album.images[2].url}
+                    alt="No image"
                     className="cursor-pointer select-none"
-                  ></img>
+                    width={item.track.album.images[2].width}
+                    height={item.track.album.images[2].height}
+                  />
                 </a>
                 <div className="ml-4 flex flex-col justify-center">
                   <a href={item.track.external_urls.spotify} target="_blank">

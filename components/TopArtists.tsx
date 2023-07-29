@@ -1,5 +1,6 @@
 import { SpecificArtist } from "@/utils/types";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 interface TopArtistsProps {
   topArtists: SpecificArtist[];
 }
@@ -63,11 +64,14 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
               className="mb-10 flex flex-col items-center justify-start md:my-10"
             >
               <a href={artist.external_urls.spotify} target="_blank">
-                <img
+                <Image
                   src={artist.images[0].url}
                   alt="No image"
-                  className="cursor-pointer select-none"
-                ></img>
+                  className="cursor-pointer select-none rounded-lg"
+                  width={artist.images[0].width}
+                  height={artist.images[0].height}
+                  objectFit="contain"
+                />
               </a>
               <a
                 href={artist.external_urls.spotify}
