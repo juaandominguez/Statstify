@@ -68,6 +68,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                   className="cursor-pointer select-none"
                   width={track.album.images[0].width}
                   height={track.album.images[0].height}
+                  loading="eager"
                 />
               </a>
               <a

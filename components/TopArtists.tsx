@@ -70,6 +70,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
                   className="cursor-pointer select-none rounded-lg"
                   width={artist.images[0].width}
                   height={artist.images[0].height}
+                  loading="eager"
                   objectFit="contain"
                 />
               </a>
