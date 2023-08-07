@@ -1,4 +1,10 @@
-import { TrackCall, ArtistCall, RecentlyPlayedCall } from "./types";
+import {
+  TrackCall,
+  ArtistCall,
+  RecentlyPlayedCall,
+  SpecificArtist,
+  Track,
+} from "./types";
 import { TimeRange } from "./types";
 async function fetchWebApi(
   endpoint: string,
@@ -43,4 +49,18 @@ async function getRecentlyPlayed(token: string) {
   return tracks.items;
 }
 
-export { getTopTracks, getTopArtists, getRecentlyPlayed };
+async function getArtist(id: string) {
+  const artist: SpecificArtist = await fetchWebApi(
+    `v1/artists/${id}`,
+    "GET",
+    ""
+  );
+  return artist;
+}
+
+async function getTrack(id: string, token: string) {
+  const track: Track = await fetchWebApi(`v1/tracks/${id}`, "GET", token);
+  return track;
+}
+
+export { getTopTracks, getTopArtists, getRecentlyPlayed, getArtist, getTrack };
