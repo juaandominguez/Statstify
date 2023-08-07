@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { Artist, Track } from "@/utils/types";
 import Image from "next/image";
@@ -54,7 +55,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
       </div>
       <div className="mt-4 flex min-h-[50vh] flex-col items-center justify-center">
         <div
-          className={`mx-[10vw] grid grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-6`}
+          className={`mx-[10vw] grid grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6`}
         >
           {currentTopTracks?.map((track, index) => (
             <div

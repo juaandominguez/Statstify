@@ -6,7 +6,6 @@ import TopGenres from "./TopGenres";
 import { Item, SpecificArtist, Track } from "@/utils/types";
 import TopArtists from "./TopArtists";
 import RecentlyPlayed from "./RecentlyPlayed";
-import { Session } from "@/utils/types";
 import {
   getRecentlyPlayed,
   getTopTracks,

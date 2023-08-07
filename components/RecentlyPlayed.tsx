@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { Item } from "@/utils/types";
 import formatDate from "@/utils/formatDate";

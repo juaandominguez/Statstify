@@ -1,3 +1,4 @@
+"use client";
 import { SpecificArtist } from "@/utils/types";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -56,7 +57,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
       </div>
       <div className="mt-4 flex min-h-[50vh] flex-col items-center justify-center">
         <div
-          className={`mx-[10vw] grid grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-6`}
+          className={`mx-[10vw] grid grid-cols-2 gap-x-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6`}
         >
           {currentTopArtists?.map((artist, index) => (
             <div
@@ -64,15 +65,17 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
               className="mb-10 flex flex-col items-center justify-start md:my-10"
             >
               <a href={artist.external_urls.spotify} target="_blank">
-                <Image
-                  src={artist.images[0].url}
-                  alt="No image"
-                  className="cursor-pointer select-none rounded-lg"
-                  width={artist.images[0].width}
-                  height={artist.images[0].height}
-                  loading="eager"
-                  objectFit="contain"
-                />
+                <div className="flex h-[11rem] w-[11rem] items-center justify-center overflow-hidden rounded-full">
+                  <Image
+                    src={artist.images[0].url}
+                    alt="No image"
+                    className="h-full w-full cursor-pointer select-none object-cover"
+                    width={artist.images[0].width}
+                    height={artist.images[0].height}
+                    loading="eager"
+                    objectFit="cover"
+                  />
+                </div>
               </a>
               <a
                 href={artist.external_urls.spotify}
