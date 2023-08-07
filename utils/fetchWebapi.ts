@@ -63,4 +63,26 @@ async function getTrack(id: string, token: string) {
   return track;
 }
 
-export { getTopTracks, getTopArtists, getRecentlyPlayed, getArtist, getTrack };
+async function getTrackFeatures(id: string, token: string) {
+  const features = await fetchWebApi(`v1/audio-features/${id}`, "GET", token);
+  return features;
+}
+
+async function getRecommendedTracks(seedTrack: string, token: string) {
+  const tracks = await fetchWebApi(
+    `v1/recommendations?limit=100&seed_tracks=${seedTrack}`,
+    "GET",
+    token
+  );
+  return tracks.tracks;
+}
+
+export {
+  getTopTracks,
+  getTopArtists,
+  getRecentlyPlayed,
+  getArtist,
+  getTrack,
+  getTrackFeatures,
+  getRecommendedTracks,
+};
