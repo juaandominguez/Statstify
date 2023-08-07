@@ -1,4 +1,3 @@
-"use client";
 import NextAuthSessionProvider from "@/providers/sessionProvider";
 import "./globals.css";
 import { Inter } from "next/font/google";

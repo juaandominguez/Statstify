@@ -8,6 +8,7 @@ import { TimeRange } from "@/utils/types";
 interface NavbarProps {
   session: any;
   timeRange: TimeRange;
+  // eslint-disable-next-line no-unused-vars
   handleChange: (value: TimeRange) => void;
 }
 
