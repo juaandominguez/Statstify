@@ -106,7 +106,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
     );
   }
   return (
-    <main className="m-10 flex w-[80vw] flex-col items-center justify-center border border-red-500">
+    <main className="m-10 flex w-[80vw] flex-col items-center justify-center">
       <section className="flex w-full flex-col items-center md:flex-row">
         <a
           href={track.external_urls.spotify}
