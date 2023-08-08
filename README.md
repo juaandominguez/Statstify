@@ -29,3 +29,4 @@ Statstify provides users with a simple and intuitive interface to view their top
 - Top tracks: View your top tracks on Spotify in 3 time ranges: last month, last 6 months, and lifetime.
 - Top artists: View your top artists on Spotify in 3 time ranges: last month, last 6 months, and lifetime.
 - Recent plays: View your recent plays on Spotify.
+- Tracks: View the main characteristics of each song, and recommended similiar tracks.
