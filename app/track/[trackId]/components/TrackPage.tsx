@@ -14,6 +14,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { audioFeatures } from "@/utils/AudioFeatures";
 import next from "@/public/assets/next.png";
 import prev from "@/public/assets/prev.png";
+import spotify from "@/public/assets/spotify.svg";
 
 Chart.register(RadialLinearScale);
 
@@ -134,6 +135,15 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
               </a>
             ))}
           </p>
+          <div className="h-8 w-8">
+            <a href={track.external_urls.spotify} target="_blank">
+              <Image
+                src={spotify}
+                alt="Spotify"
+                className=" grayscale transition duration-300 hover:grayscale-0"
+              />
+            </a>
+          </div>
         </article>
       </section>
       <section className="mt-3 flex w-[75vw] flex-wrap justify-between md:mt-10">
@@ -146,7 +156,13 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
         <div className="my-5 flex w-48 flex-col items-center justify-center md:w-[17vw]">
           <h5 className="text-xl font-bold text-white">{`${Math.floor(
             track.duration_ms / 1000 / 60
-          )}:${Math.ceil((track.duration_ms / 1000) % 60)}`}</h5>
+          )}:${Math.ceil((track.duration_ms / 1000) % 60).toLocaleString(
+            "en-US",
+            {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            }
+          )}`}</h5>
           <p className="font-semibold">Track length</p>
         </div>
         <div className="my-5 flex w-48 flex-col items-center justify-center md:w-[17vw]">
@@ -322,14 +338,25 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
                   height={track?.album.images[0].height}
                 />
               </a>
-              <p className="mt-2 font-semibold text-white">{track.name}</p>
-              <p className="font-semibold text-gray-400">
-                {track.artists[0].name}
+              <p className="mt-2 line-clamp-1 max-w-[20vw] font-semibold text-white">
+                {track.name}
+              </p>
+              <p className="line-clamp-1 max-w-[20vw] font-semibold text-gray-400">
+                {track.artists.map((artist, index) => (
+                  <a
+                    href={artist.external_urls.spotify}
+                    target="_blank"
+                    className="cursor-pointer transition duration-200 hover:text-white"
+                    key={artist.id}
+                  >{`${artist.name}${
+                    index !== track.artists.length - 1 ? ", " : ""
+                  }`}</a>
+                ))}
               </p>
             </div>
           ))}
           <button
-            className="btn absolute right-[11vw] h-10 w-20 rounded-full"
+            className="btn absolute right-[11vw] mb-10 h-3 w-12 rounded-full md:mb-[2.5vw] md:h-5 md:w-16"
             onClick={handleNextClick}
           >
             <Image
@@ -340,7 +367,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
             />
           </button>
           <button
-            className="btn absolute left-[11vw] h-10 w-20 rounded-full"
+            className="btn absolute left-[11vw] mb-10 h-3 w-12 rounded-full md:mb-[2.5vw] md:h-5 md:w-16"
             onClick={handlePreviousClick}
           >
             <Image
