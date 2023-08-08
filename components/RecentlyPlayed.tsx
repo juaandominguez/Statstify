@@ -54,7 +54,6 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
               <div className="flex">
                 <a
                   href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
-                  target="_blank"
                 >
                   <Image
                     src={item.track.album.images[2].url}
@@ -67,7 +66,6 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                 <div className="ml-4 flex flex-col justify-center">
                   <a
                     href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
-                    target="_blank"
                   >
                     <h4 className="cursor-pointer font-bold text-white">
                       {item.track.name}
@@ -83,10 +81,9 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                     >
                       {item?.track?.artists?.map((artist, index) => (
                         <a
-                          href={artist.external_urls.spotify}
+                          href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
                           key={artist.id}
                           className="mr-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
-                          target="_blank"
                         >
                           {`${artist.name}${
                             index !== item.track.artists.length - 1 ? ", " : ""
