@@ -30,6 +30,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
   const recommendedTracksRef = useRef<HTMLDivElement>(null);
 
   const handleNextClick = () => {
+    //if screen is smaller than 768px, scroll by 1000px
     if (recommendedTracksRef.current) {
       recommendedTracksRef.current.scrollBy({
         left: 1000,
@@ -126,7 +127,8 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
           <p className="font-semibold">
             {track.artists.map((artist, index) => (
               <a
-                href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+                href={artist.external_urls.spotify}
+                target="_blank"
                 key={artist.id}
                 className="duration-200 hover:text-white"
               >
@@ -140,20 +142,20 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
               <Image
                 src={spotify}
                 alt="Spotify"
-                className=" grayscale transition duration-300 hover:grayscale-0"
+                className="grayscale transition duration-300 hover:grayscale-0"
               />
             </a>
           </div>
         </article>
       </section>
       <section className="mt-3 flex w-[75vw] flex-wrap justify-between md:mt-10">
-        <div className="my-5 flex w-48 flex-col items-center justify-center md:w-[17vw]">
+        <div className="mx-auto my-5 flex w-48 flex-col items-center justify-center md:mx-0 md:w-[17vw]">
           <h5 className="text-xl font-bold text-white">
             {track.album.release_date}
           </h5>
           <p className="font-semibold">Release date</p>
         </div>
-        <div className="my-5 flex w-48 flex-col items-center justify-center md:w-[17vw]">
+        <div className="mx-auto my-5 flex w-48 flex-col items-center justify-center md:mx-0 md:w-[17vw]">
           <h5 className="text-xl font-bold text-white">{`${Math.floor(
             track.duration_ms / 1000 / 60
           )}:${Math.ceil((track.duration_ms / 1000) % 60).toLocaleString(
@@ -165,13 +167,13 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
           )}`}</h5>
           <p className="font-semibold">Track length</p>
         </div>
-        <div className="my-5 flex w-48 flex-col items-center justify-center md:w-[17vw]">
+        <div className="mx-auto my-5 flex w-48 flex-col items-center justify-center md:mx-0 md:w-[17vw]">
           <h5 className="text-xl font-bold text-white">
             {track.popularity / 10}
           </h5>
           <p className="font-semibold">0-10 Popularity</p>
         </div>
-        <div className="my-5 flex w-48 flex-col items-center justify-center md:w-[17vw]">
+        <div className="mx-auto my-5 flex w-48 flex-col items-center justify-center md:mx-0 md:w-[17vw]">
           <h5 className="text-xl font-bold text-white">
             {track.explicit ? "Yes" : "No"}
           </h5>
@@ -344,8 +346,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
               <p className="line-clamp-1 max-w-[20vw] font-semibold text-gray-400">
                 {track.artists.map((artist, index) => (
                   <a
-                    href={artist.external_urls.spotify}
-                    target="_blank"
+                    href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
                     className="cursor-pointer transition duration-200 hover:text-white"
                     key={artist.id}
                   >{`${artist.name}${
