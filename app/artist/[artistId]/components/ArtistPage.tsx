@@ -337,9 +337,12 @@ const ArtistPage: React.FC<TrackPageProps> = ({ artistId, session }) => {
                   />
                 </div>
               </a>
-              <h4 className="mt-2 line-clamp-1 max-w-[20vw] font-semibold text-white">
+              <a
+                href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+                className="mt-2 line-clamp-1 max-w-[20vw] cursor-pointer font-semibold text-white"
+              >
                 {artist.name}
-              </h4>
+              </a>
             </div>
           ))}
           <button
