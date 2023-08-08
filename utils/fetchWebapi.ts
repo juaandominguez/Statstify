@@ -4,6 +4,7 @@ import {
   RecentlyPlayedCall,
   SpecificArtist,
   Track,
+  AudioFeatures,
 } from "./types";
 import { TimeRange } from "./types";
 async function fetchWebApi(
@@ -49,11 +50,11 @@ async function getRecentlyPlayed(token: string) {
   return tracks.items;
 }
 
-async function getArtist(id: string) {
+async function getArtist(id: string, token: string) {
   const artist: SpecificArtist = await fetchWebApi(
     `v1/artists/${id}`,
     "GET",
-    ""
+    token
   );
   return artist;
 }
@@ -64,7 +65,11 @@ async function getTrack(id: string, token: string) {
 }
 
 async function getTrackFeatures(id: string, token: string) {
-  const features = await fetchWebApi(`v1/audio-features/${id}`, "GET", token);
+  const features: AudioFeatures = await fetchWebApi(
+    `v1/audio-features/${id}`,
+    "GET",
+    token
+  );
   return features;
 }
 
@@ -74,7 +79,33 @@ async function getRecommendedTracks(seedTrack: string, token: string) {
     "GET",
     token
   );
-  return tracks.tracks;
+  return tracks.tracks as Track[];
+}
+async function getArtistTopTracks(id: string, token: string) {
+  const tracks = await fetchWebApi(
+    `v1/artists/${id}/top-tracks?market=US`,
+    "GET",
+    token
+  );
+  return tracks.tracks as Track[];
+}
+
+async function getArtistTopAlbums(id: string, token: string) {
+  const albums = await fetchWebApi(
+    `v1/artists/${id}/albums?market=US`,
+    "GET",
+    token
+  );
+  return albums.items;
+}
+
+async function getRecommendedArtists(artistId: string, token: string) {
+  const artists = await fetchWebApi(
+    `v1/artists/${artistId}/related-artists`,
+    "GET",
+    token
+  );
+  return artists.artists as SpecificArtist[];
 }
 
 export {
@@ -85,4 +116,7 @@ export {
   getTrack,
   getTrackFeatures,
   getRecommendedTracks,
+  getArtistTopTracks,
+  getArtistTopAlbums,
+  getRecommendedArtists,
 };

@@ -23,6 +23,7 @@ interface TrackPageProps {
   session: any;
 }
 const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
+  const [windowWidth, setWindowWidth] = useState<number>(0);
   const [track, setTrack] = useState<Track>();
   const [trackFeatures, setTrackFeatures] = useState<AudioFeatures>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -30,10 +31,10 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
   const recommendedTracksRef = useRef<HTMLDivElement>(null);
 
   const handleNextClick = () => {
-    //if screen is smaller than 768px, scroll by 1000px
     if (recommendedTracksRef.current) {
+      const scrollAmount = windowWidth >= 900 ? 1000 : 200;
       recommendedTracksRef.current.scrollBy({
-        left: 1000,
+        left: scrollAmount,
         behavior: "smooth",
       });
     }
@@ -41,12 +42,20 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
 
   const handlePreviousClick = () => {
     if (recommendedTracksRef.current) {
+      const scrollAmount = windowWidth >= 900 ? 1000 : 200;
       recommendedTracksRef.current.scrollBy({
-        left: -1000,
+        left: -scrollAmount,
         behavior: "smooth",
       });
     }
   };
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const mapKeys = (n: number) => {
     switch (n) {
       case 0:
@@ -88,7 +97,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
         const rt = await getRecommendedTracks(trackId, session.accessToken);
         setRecommendedTracks(rt);
       } catch (e) {
-        console.log(e);
+        console.error(e);
       } finally {
         setIsLoading(false);
       }
@@ -116,6 +125,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
           className="flex w-[50vw] sm:w-[40vw] lg:w-[30vw] xl:w-[20vw]"
         >
           <Image
+            priority
             src={track.album.images[0].url}
             alt="album cover"
             width={track?.album.images[0].width}
@@ -127,8 +137,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
           <p className="font-semibold">
             {track.artists.map((artist, index) => (
               <a
-                href={artist.external_urls.spotify}
-                target="_blank"
+                href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
                 key={artist.id}
                 className="duration-200 hover:text-white"
               >
@@ -343,7 +352,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
               <p className="mt-2 line-clamp-1 max-w-[20vw] font-semibold text-white">
                 {track.name}
               </p>
-              <p className="line-clamp-1 max-w-[20vw] font-semibold text-gray-400">
+              <p className="line-clamp-1 max-w-[20vw] text-xs font-semibold text-gray-400 md:text-base">
                 {track.artists.map((artist, index) => (
                   <a
                     href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}

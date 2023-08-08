@@ -64,6 +64,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
             >
               <a href={`${process.env.NEXT_PUBLIC_URL}/track/${track.id}`}>
                 <Image
+                  priority
                   src={track.album.images[0].url}
                   alt="No image"
                   className="cursor-pointer select-none"
@@ -93,8 +94,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
               >
                 {track?.artists?.map((artist: Artist, index: number) => (
                   <a
-                    href={artist.external_urls.spotify}
-                    target="_blank"
+                    href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
                     key={artist.id}
                     className="cursor-pointer duration-200 hover:text-white"
                   >{`${artist.name}${
