@@ -1,4 +1,11 @@
-import { TrackCall, ArtistCall, RecentlyPlayedCall } from "./types";
+import {
+  TrackCall,
+  ArtistCall,
+  RecentlyPlayedCall,
+  SpecificArtist,
+  Track,
+  AudioFeatures,
+} from "./types";
 import { TimeRange } from "./types";
 async function fetchWebApi(
   endpoint: string,
@@ -43,4 +50,73 @@ async function getRecentlyPlayed(token: string) {
   return tracks.items;
 }
 
-export { getTopTracks, getTopArtists, getRecentlyPlayed };
+async function getArtist(id: string, token: string) {
+  const artist: SpecificArtist = await fetchWebApi(
+    `v1/artists/${id}`,
+    "GET",
+    token
+  );
+  return artist;
+}
+
+async function getTrack(id: string, token: string) {
+  const track: Track = await fetchWebApi(`v1/tracks/${id}`, "GET", token);
+  return track;
+}
+
+async function getTrackFeatures(id: string, token: string) {
+  const features: AudioFeatures = await fetchWebApi(
+    `v1/audio-features/${id}`,
+    "GET",
+    token
+  );
+  return features;
+}
+
+async function getRecommendedTracks(seedTrack: string, token: string) {
+  const tracks = await fetchWebApi(
+    `v1/recommendations?limit=100&seed_tracks=${seedTrack}`,
+    "GET",
+    token
+  );
+  return tracks.tracks as Track[];
+}
+async function getArtistTopTracks(id: string, token: string) {
+  const tracks = await fetchWebApi(
+    `v1/artists/${id}/top-tracks?market=US`,
+    "GET",
+    token
+  );
+  return tracks.tracks as Track[];
+}
+
+async function getArtistTopAlbums(id: string, token: string) {
+  const albums = await fetchWebApi(
+    `v1/artists/${id}/albums?market=US`,
+    "GET",
+    token
+  );
+  return albums.items;
+}
+
+async function getRecommendedArtists(artistId: string, token: string) {
+  const artists = await fetchWebApi(
+    `v1/artists/${artistId}/related-artists`,
+    "GET",
+    token
+  );
+  return artists.artists as SpecificArtist[];
+}
+
+export {
+  getTopTracks,
+  getTopArtists,
+  getRecentlyPlayed,
+  getArtist,
+  getTrack,
+  getTrackFeatures,
+  getRecommendedTracks,
+  getArtistTopTracks,
+  getArtistTopAlbums,
+  getRecommendedArtists,
+};

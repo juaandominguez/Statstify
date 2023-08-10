@@ -1,6 +1,6 @@
 # Statstify
 
-Statstify is a web application that allows users to get their top tracks, artists, and recent plays on Spotify in 3 time ranges: last month, last 6 months, and lifetime. It uses the Spotify API and nextAuth authentication to provide a seamless and secure user experience.
+Statstify is a web application that allows users to get their top tracks, artists, and recent plays on Spotify in 3 time ranges: last month, last 6 months, and lifetime, as well as individual track and artist information. It uses the Spotify API and nextAuth authentication to provide a seamless and secure user experience.
 
 ## Installation and Usage
 
@@ -29,3 +29,5 @@ Statstify provides users with a simple and intuitive interface to view their top
 - Top tracks: View your top tracks on Spotify in 3 time ranges: last month, last 6 months, and lifetime.
 - Top artists: View your top artists on Spotify in 3 time ranges: last month, last 6 months, and lifetime.
 - Recent plays: View your recent plays on Spotify.
+- Tracks: View the main characteristics of each song, and recommended similiar tracks.
+- Artists: View the top tracks and albums of each artist, and recommended similiar artists.

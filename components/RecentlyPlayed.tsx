@@ -52,7 +52,9 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
             )}
             <div className="flex flex-row justify-between">
               <div className="flex">
-                <a href={item.track.external_urls.spotify} target="_blank">
+                <a
+                  href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
+                >
                   <Image
                     src={item.track.album.images[2].url}
                     alt="No image"
@@ -62,7 +64,9 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                   />
                 </a>
                 <div className="ml-4 flex flex-col justify-center">
-                  <a href={item.track.external_urls.spotify} target="_blank">
+                  <a
+                    href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
+                  >
                     <h4 className="cursor-pointer font-bold text-white">
                       {item.track.name}
                     </h4>
@@ -77,10 +81,9 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                     >
                       {item?.track?.artists?.map((artist, index) => (
                         <a
-                          href={artist.external_urls.spotify}
+                          href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
                           key={artist.id}
-                          className="mr-1 cursor-pointer text-sm font-semibold hover:text-white"
-                          target="_blank"
+                          className="mr-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
                         >
                           {`${artist.name}${
                             index !== item.track.artists.length - 1 ? ", " : ""
@@ -91,7 +94,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                     <a
                       href={item.track.album.external_urls.spotify}
                       target="_blank"
-                      className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold hover:text-white"
+                      className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
                       style={{
                         display: "-webkit-box",
                         WebkitLineClamp: 1,

@@ -64,7 +64,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
               key={artist.id}
               className="mb-10 flex flex-col items-center justify-start md:my-10"
             >
-              <a href={artist.external_urls.spotify} target="_blank">
+              <a href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}>
                 <div className="flex h-[11rem] w-[11rem] items-center justify-center overflow-hidden rounded-full">
                   <Image
                     src={artist.images[0].url}
@@ -73,12 +73,11 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
                     width={artist.images[0].width}
                     height={artist.images[0].height}
                     loading="eager"
-                    objectFit="cover"
                   />
                 </div>
               </a>
               <a
-                href={artist.external_urls.spotify}
+                href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
                 target="_blank"
                 className="mt-4 line-clamp-2 max-h-[50px] cursor-pointer overflow-hidden text-center font-semibold text-white"
                 style={{
