@@ -178,3 +178,32 @@ export interface AudioFeatures {
   uri: string;
   valence: number;
 }
+
+export interface Playlist {
+  collaborative: boolean;
+  description: string;
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  owner: Owner;
+  public: null;
+  snapshot_id: string;
+  tracks: TrackNum;
+  uri: string;
+  primary_color: null;
+}
+
+export interface Owner {
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  uri: string;
+  display_name: string;
+}
+
+export interface TrackNum {
+  href: string;
+  total: number;
+}

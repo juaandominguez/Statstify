@@ -108,6 +108,15 @@ async function getRecommendedArtists(artistId: string, token: string) {
   return artists.artists as SpecificArtist[];
 }
 
+async function searchItems(query: string, token: string) {
+  const items = await fetchWebApi(
+    `v1/search?q=${query}&type=track,artist,album,playlist&limit=50`,
+    "GET",
+    token
+  );
+  return items;
+}
+
 export {
   getTopTracks,
   getTopArtists,
@@ -119,4 +128,5 @@ export {
   getArtistTopTracks,
   getArtistTopAlbums,
   getRecommendedArtists,
+  searchItems,
 };
