@@ -180,16 +180,6 @@ export interface AudioFeatures {
 }
 
 export interface Playlist {
-  href: string;
-  limit: number;
-  next: string;
-  offset: number;
-  previous: null;
-  total: number;
-  items: PlaylistItem[];
-}
-
-export interface PlaylistItem {
   collaborative: boolean;
   description: string;
   external_urls: ExternalUrls;
