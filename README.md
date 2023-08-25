@@ -1,5 +1,8 @@
 # Statstify
 
+![Statstify Home Image](https://statstify.vercel.app/og.png)
+![Statstify Audio Features](https://statstify.vercel.app/audio_features.png)
+
 Statstify is a web application that allows users to get their top tracks, artists, and recent plays on Spotify in 3 time ranges: last month, last 6 months, and lifetime, as well as individual track and artist information. It uses the Spotify API and nextAuth authentication to provide a seamless and secure user experience.
 
 ## Installation and Usage
@@ -13,14 +16,14 @@ To install and run Statstify locally, follow these steps:
 
 Before running the project, make sure to create a `.env` file in the root directory with the following variables:
 
-| .env |
-| ------ |
-| SPOTIFY_BASE_API_URL |
-| SPOTIFY_CLIENT_ID |
+| .env                  |
+| --------------------- |
+| SPOTIFY_BASE_API_URL  |
+| SPOTIFY_CLIENT_ID     |
 | SPOTIFY_CLIENT_SECRET |
-| NEXTAUTH_SECRET |
-| NEXTAUTH_URL |
-| NEXT_URL |
+| NEXTAUTH_SECRET       |
+| NEXTAUTH_URL          |
+| NEXT_URL              |
 
 ## Features and Functionality
 
