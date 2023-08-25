@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["i.scdn.co", "links.papareact.com", "res.cloudinary.com"],
+    domains: ["i.scdn.co"],
+    unoptimized: true,
   },
   reactStrictMode: true,
 };
