@@ -65,11 +65,11 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
               <a href={`${process.env.NEXT_PUBLIC_URL}/track/${track.id}`}>
                 <Image
                   priority
-                  src={track.album.images[0].url}
+                  src={track?.album?.images[0]?.url}
                   alt="No image"
                   className="cursor-pointer select-none"
-                  width={track.album.images[0].width}
-                  height={track.album.images[0].height}
+                  width={track?.album?.images[0]?.width}
+                  height={track?.album?.images[0]?.height}
                   loading="eager"
                 />
               </a>
@@ -82,7 +82,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                   WebkitLineClamp: 2,
                 }}
               >
-                {`${index + (page - 1) * 6 + 1}. ${track.name}`}
+                {`${index + (page - 1) * 6 + 1}. ${track?.name}`}
               </a>
               <p
                 className="line-clamp-2 max-h-[50px] overflow-hidden text-center text-sm font-semibold"
@@ -98,7 +98,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                     key={artist.id}
                     className="cursor-pointer duration-200 hover:text-white"
                   >{`${artist.name}${
-                    index !== track.artists.length - 1 ? ", " : ""
+                    index !== track?.artists?.length - 1 ? ", " : ""
                   }`}</a>
                 ))}
               </p>

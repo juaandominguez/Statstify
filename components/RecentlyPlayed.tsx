@@ -56,11 +56,11 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                   href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
                 >
                   <Image
-                    src={item.track.album.images[2].url}
+                    src={item?.track?.album?.images[2]?.url}
                     alt="No image"
                     className="cursor-pointer select-none"
-                    width={item.track.album.images[2].width}
-                    height={item.track.album.images[2].height}
+                    width={item?.track?.album?.images[2]?.width}
+                    height={item?.track?.album?.images[2]?.height}
                   />
                 </a>
                 <div className="ml-4 flex flex-col justify-center">
@@ -68,7 +68,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                     href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
                   >
                     <h4 className="cursor-pointer font-bold text-white">
-                      {item.track.name}
+                      {item?.track?.name}
                     </h4>
                   </a>
                   <div className="flex flex-row items-end">
@@ -92,7 +92,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                       ))}
                     </div>
                     <a
-                      href={item.track.album.external_urls.spotify}
+                      href={item?.track?.album?.external_urls?.spotify}
                       target="_blank"
                       className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
                       style={{
@@ -101,7 +101,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                         minWidth: "30px",
                       }}
                     >
-                      • {item.track.album.name}
+                      • {item?.track?.album?.name}
                     </a>
                   </div>
                 </div>

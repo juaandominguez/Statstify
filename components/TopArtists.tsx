@@ -67,11 +67,11 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
               <a href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}>
                 <div className="flex h-[11rem] w-[11rem] items-center justify-center overflow-hidden rounded-full">
                   <Image
-                    src={artist.images[0].url}
+                    src={artist?.images[0]?.url}
                     alt="No image"
                     className="h-full w-full cursor-pointer select-none object-cover"
-                    width={artist.images[0].width}
-                    height={artist.images[0].height}
+                    width={artist?.images[0]?.width}
+                    height={artist?.images[0]?.height}
                     loading="eager"
                   />
                 </div>
@@ -86,7 +86,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
                   WebkitLineClamp: 2,
                 }}
               >
-                {`${index + (page - 1) * 6 + 1}. ${artist.name}`}
+                {`${index + (page - 1) * 6 + 1}. ${artist?.name}`}
               </a>
             </div>
           ))}
