@@ -19,7 +19,6 @@ const SearchPage: React.FC<Props> = ({ searchPathParam, session }) => {
     (async () => {
       try {
         const items = await searchItems(searchPathParam, session.accessToken);
-        console.table(items);
         setSearchResults(items);
       } catch (e) {
         console.error(e);
