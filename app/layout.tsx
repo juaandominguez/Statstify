@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Statstify",
-  description: "Check your spotify stats with Statstify",
+  description:
+    "Statstify: Your go-to for online Spotify stats, artists, premium, and more. Explore Spotify's world on the web, and optimize your music journey!",
 };
 
 export default function RootLayout({
