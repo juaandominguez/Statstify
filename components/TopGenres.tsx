@@ -36,16 +36,22 @@ const TopGenres: React.FC<TopGenreProps> = ({ topArtists }) => {
   }, [topArtists]);
 
   return (
-    <div className="mt-6 flex w-full flex-grow flex-row items-center overflow-x-scroll px-12">
-      {genres.map((genre) => (
-        <div
-          key={genre.name}
-          className="btn mx-3 rounded-full px-5 py-3 font-semibold"
-        >
-          {genre.name}
+    <>
+      {genres.length > 0 ? (
+        <div className="mt-6 flex w-full flex-grow flex-row items-center overflow-x-scroll px-12">
+          {genres.map((genre) => (
+            <div
+              key={genre.name}
+              className="btn mx-3 rounded-full px-5 py-3 font-semibold"
+            >
+              {genre.name}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      ) : (
+        <h2 className=" my-10 text-center text-xl">No genres found</h2>
+      )}
+    </>
   );
 };
 

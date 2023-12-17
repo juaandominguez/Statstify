@@ -5,6 +5,7 @@ import {
   SpecificArtist,
   Track,
   AudioFeatures,
+  Album,
 } from "./types";
 import { TimeRange } from "./types";
 async function fetchWebApi(
@@ -96,7 +97,7 @@ async function getArtistTopAlbums(id: string, token: string) {
     "GET",
     token
   );
-  return albums.items;
+  return albums.items as Album[];
 }
 
 async function getRecommendedArtists(artistId: string, token: string) {
@@ -117,6 +118,24 @@ async function searchItems(query: string, token: string) {
   return items;
 }
 
+async function getAlbum(albumId: string, token: string) {
+  const album = await fetchWebApi(
+    `v1/albums/${albumId}?market=US`,
+    "GET",
+    token
+  );
+  return album as Album;
+}
+
+async function getAlbumTracks(albumId: string, token: string) {
+  const tracks = await fetchWebApi(
+    `v1/albums/${albumId}/tracks?market=US`,
+    "GET",
+    token
+  );
+  return tracks.items as Track[];
+}
+
 export {
   getTopTracks,
   getTopArtists,
@@ -129,4 +148,6 @@ export {
   getArtistTopAlbums,
   getRecommendedArtists,
   searchItems,
+  getAlbum,
+  getAlbumTracks,
 };

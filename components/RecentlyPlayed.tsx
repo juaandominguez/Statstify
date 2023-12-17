@@ -37,83 +37,94 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
     }
   };
   return (
-    <div className="mt-6 sm:mx-10 md:mx-20">
-      {tracks?.map((item, index) => {
-        const date = item.played_at.substring(0, 10);
-        const shouldShowDate = date !== prevDate;
-        prevDate = date;
+    <>
+      {tracks.length > 0 ? (
+        <div className="mt-6 sm:mx-10 md:mx-20">
+          {tracks?.map((item, index) => {
+            const date = item.played_at.substring(0, 10);
+            const shouldShowDate = date !== prevDate;
+            prevDate = date;
 
-        return (
-          <div key={index} className=" mb-3 border-b border-b-gray-500 pb-3">
-            {shouldShowDate && (
-              <div className="mb-2 text-sm font-semibold">
-                {formatDate(date)}
-              </div>
-            )}
-            <div className="flex flex-row justify-between">
-              <div className="flex">
-                <a
-                  href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
-                >
-                  <Image
-                    src={item?.track?.album?.images[2]?.url}
-                    alt="No image"
-                    className="cursor-pointer select-none"
-                    width={item?.track?.album?.images[2]?.width}
-                    height={item?.track?.album?.images[2]?.height}
-                  />
-                </a>
-                <div className="ml-4 flex flex-col justify-center">
-                  <a
-                    href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
-                  >
-                    <h4 className="cursor-pointer font-bold text-white">
-                      {item?.track?.name}
-                    </h4>
-                  </a>
-                  <div className="flex flex-row items-end">
-                    <div
-                      className="line-clamp-1 flex w-[120px] flex-row overflow-hidden overflow-ellipsis sm:w-[30vw] lg:w-auto"
-                      style={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 1,
-                      }}
-                    >
-                      {item?.track?.artists?.map((artist, index) => (
-                        <a
-                          href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
-                          key={artist.id}
-                          className="mr-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
-                        >
-                          {`${artist.name}${
-                            index !== item.track.artists.length - 1 ? ", " : ""
-                          }`}
-                        </a>
-                      ))}
-                    </div>
+            return (
+              <div
+                key={index}
+                className=" mb-3 border-b border-b-gray-500 pb-3"
+              >
+                {shouldShowDate && (
+                  <div className="mb-2 text-sm font-semibold">
+                    {formatDate(date)}
+                  </div>
+                )}
+                <div className="flex flex-row justify-between">
+                  <div className="flex">
                     <a
-                      href={item?.track?.album?.external_urls?.spotify}
-                      target="_blank"
-                      className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
-                      style={{
-                        display: "-webkit-box",
-                        WebkitLineClamp: 1,
-                        minWidth: "30px",
-                      }}
+                      href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
                     >
-                      • {item?.track?.album?.name}
+                      <Image
+                        src={item?.track?.album?.images[2]?.url}
+                        alt="No image"
+                        className="cursor-pointer select-none"
+                        width={item?.track?.album?.images[2]?.width}
+                        height={item?.track?.album?.images[2]?.height}
+                      />
                     </a>
+                    <div className="ml-4 flex flex-col justify-center">
+                      <a
+                        href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
+                      >
+                        <h4 className="cursor-pointer font-bold text-white">
+                          {item?.track?.name}
+                        </h4>
+                      </a>
+                      <div className="flex flex-row items-end">
+                        <div
+                          className="line-clamp-1 flex w-[120px] flex-row overflow-hidden overflow-ellipsis sm:w-[30vw] lg:w-auto"
+                          style={{
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                          }}
+                        >
+                          {item?.track?.artists?.map((artist, index) => (
+                            <a
+                              href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+                              key={artist.id}
+                              className="mr-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
+                            >
+                              {`${artist.name}${
+                                index !== item.track.artists.length - 1
+                                  ? ", "
+                                  : ""
+                              }`}
+                            </a>
+                          ))}
+                        </div>
+                        <a
+                          href={item?.track?.album?.external_urls?.spotify}
+                          target="_blank"
+                          className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
+                          style={{
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            minWidth: "30px",
+                          }}
+                        >
+                          • {item?.track?.album?.name}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-sm font-bold">
+                    {getDaysAgoString(date)}
                   </div>
                 </div>
               </div>
-              <div className="flex items-center text-sm font-bold">
-                {getDaysAgoString(date)}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+      ) : (
+        <h2 className="my-10 text-center text-xl">No recent tracks found</h2>
+      )}
+    </>
   );
 };
 

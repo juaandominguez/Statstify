@@ -14,8 +14,7 @@ const TrackAppearsOn: React.FC<Props> = ({ track }) => {
         margin={false}
       />
       <a
-        href={track?.album.external_urls?.spotify}
-        target="_blank"
+        href={`${process.env.NEXT_PUBLIC_URL}/album/${track?.album.id}`}
         className="mt-5 flex w-[40vw] sm:w-[30vw] lg:w-[20vw] xl:w-[10vw]"
       >
         <Image
@@ -25,7 +24,7 @@ const TrackAppearsOn: React.FC<Props> = ({ track }) => {
           height={track?.album?.images[0]?.height}
         />
       </a>
-      <a href={track?.album?.external_urls?.spotify} target="_blank">
+      <a href={`${process.env.NEXT_PUBLIC_URL}/album/${track?.album.id}`}>
         <p className="mt-3 font-semibold text-white">{track?.album?.name}</p>
       </a>
     </section>

@@ -22,26 +22,27 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
   const [topTracks, setTopTracks] = useState<Track[]>([]);
   const [topArtists, setTopArtists] = useState<SpecificArtist[]>([]);
   const [recentTracks, setTracks] = useState<Item[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    async function fetchTopTracks() {
-      const tracks = await getTopTracks(token, timeRange);
-      setTopTracks(tracks);
-    }
-    async function fetchTopArtists() {
-      const tracks = await getTopArtists(token, timeRange);
-      setTopArtists(tracks);
-    }
-    fetchTopTracks();
-    fetchTopArtists();
+    (async function getTop() {
+      const topTracks = await getTopTracks(token, timeRange);
+      setTopTracks(topTracks);
+      const topArtists = await getTopArtists(token, timeRange);
+      setTopArtists(topArtists);
+      const recentlyPlayed = await getRecentlyPlayed(token);
+      setTracks(recentlyPlayed);
+      setIsLoading(false);
+    })();
   }, [timeRange, token]);
-  useEffect(() => {
-    async function fetchRecentTracks() {
-      const tracks = await getRecentlyPlayed(token);
-      setTracks(tracks);
-    }
-    fetchRecentTracks();
-  }, [token]);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen w-screen items-center justify-center">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="mt-10">
