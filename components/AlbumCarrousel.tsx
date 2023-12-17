@@ -39,8 +39,7 @@ const AlbumCarrousel: React.FC<Props> = ({ albums, windowWidth }) => {
         <div key={album.id} className="flex flex-col">
           <a
             className="h-[20vw] w-[20vw] lg:h-64 lg:w-64"
-            href={album?.external_urls?.spotify}
-            target="_blank"
+            href={`${process.env.NEXT_PUBLIC_URL}/album/${album.id}`}
           >
             <Image
               src={album?.images[0]?.url}

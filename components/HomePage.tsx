@@ -26,6 +26,7 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
 
   useEffect(() => {
     (async function getTop() {
+      // setIsLoading(true);
       const topTracks = await getTopTracks(token, timeRange);
       setTopTracks(topTracks);
       const topArtists = await getTopArtists(token, timeRange);
