@@ -10,7 +10,7 @@ const AlbumTracks: React.FC<Props> = ({ tracks }) => {
   return (
     <section className="flex w-full flex-col items-start justify-start">
       <Heading title="Album content" description={`Tracks`} margin={false} />
-      <article className="grid w-[100%] grid-cols-3">
+      <article className="grid w-[100%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {tracks?.map((track, index) => (
           <div
             key={index}
@@ -19,10 +19,13 @@ const AlbumTracks: React.FC<Props> = ({ tracks }) => {
             <div className="m-5 flex w-60 flex-row justify-start">
               <p className="mr-5 text-lg font-semibold">{index + 1}.</p>
               <div className="flex flex-col">
-                <p className="line-clamp-1 text-lg font-semibold text-white">
+                <a
+                  className="line-clamp-1 text-lg font-semibold text-white"
+                  href={`${process.env.NEXT_PUBLIC_URL}/track/${track.id}`}
+                >
                   {track.name}
-                </p>
-                <p className="line-clamp-1 max-w-[20vw] text-xs font-semibold text-gray-400 md:text-base">
+                </a>
+                <p className="max-w-60 line-clamp-1 text-xs font-semibold text-gray-400 md:text-base">
                   {track.artists.map((artist, index) => (
                     <a
                       href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}

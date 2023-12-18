@@ -48,9 +48,12 @@ const AlbumCarrousel: React.FC<Props> = ({ albums, windowWidth }) => {
               height={album?.images[0]?.height}
             />
           </a>
-          <h4 className="mt-2 line-clamp-1 max-w-[20vw] font-semibold text-white">
+          <a
+            className="mt-2 line-clamp-1 max-w-[20vw] font-semibold text-white"
+            href={`${process.env.NEXT_PUBLIC_URL}/album/${album.id}`}
+          >
             {album?.name}
-          </h4>
+          </a>
           <p className="line-clamp-1 max-w-[20vw] text-xs font-semibold text-gray-400 md:text-base">
             {album?.artists?.map((artist, index) => (
               <a

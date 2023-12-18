@@ -51,9 +51,12 @@ const TrackCarrousel: React.FC<TrackCarrouselProps> = ({
               height={track?.album?.images[0]?.height}
             />
           </a>
-          <p className="mt-2 line-clamp-1 max-w-[20vw] font-semibold text-white">
+          <a
+            className="mt-2 line-clamp-1 max-w-[20vw] font-semibold text-white"
+            href={`${process.env.NEXT_PUBLIC_URL}/track/${track.id}`}
+          >
             {track?.name}
-          </p>
+          </a>
           <p className="line-clamp-1 max-w-[20vw] text-xs font-semibold text-gray-400 md:text-base">
             {track.artists.map((artist, index) => (
               <a
