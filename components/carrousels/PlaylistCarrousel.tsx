@@ -1,8 +1,9 @@
-import { Playlist } from "@/utils/types";
+import { Playlist } from "@/types/types";
 import React, { useRef } from "react";
 import next from "@/public/assets/next.png";
 import prev from "@/public/assets/prev.png";
 import Image from "next/image";
+import { handleNextClick, handlePreviousClick } from "@/utils/CarrouselScroll";
 interface Props {
   windowWidth: number;
   playlists?: Playlist[];
@@ -11,25 +12,6 @@ interface Props {
 const PlaylistCarrousel: React.FC<Props> = ({ windowWidth, playlists }) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleNextClick = () => {
-    if (ref.current) {
-      const scrollAmount = windowWidth >= 900 ? 1000 : 200;
-      ref.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const handlePreviousClick = () => {
-    if (ref.current) {
-      const scrollAmount = windowWidth >= 900 ? 1000 : 200;
-      ref.current.scrollBy({
-        left: -scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
   return (
     <div
       className="mt-6 flex w-full flex-row items-center gap-3 overflow-x-hidden"
@@ -43,7 +25,7 @@ const PlaylistCarrousel: React.FC<Props> = ({ windowWidth, playlists }) => {
           >
             <Image
               src={playlist?.images[0]?.url}
-              alt="album cover"
+              alt="Playlist image"
               width={playlist?.images[0]?.width || 300}
               height={playlist?.images[0]?.height || 300}
             />
@@ -59,7 +41,7 @@ const PlaylistCarrousel: React.FC<Props> = ({ windowWidth, playlists }) => {
       ))}
       <button
         className="btn absolute right-[11vw] mb-10 h-3 w-12 rounded-full md:mb-[2.5vw] md:h-5 md:w-16"
-        onClick={handleNextClick}
+        onClick={() => handleNextClick(ref, windowWidth)}
       >
         <Image
           src={next.src}
@@ -70,7 +52,7 @@ const PlaylistCarrousel: React.FC<Props> = ({ windowWidth, playlists }) => {
       </button>
       <button
         className="btn absolute left-[11vw] mb-10 h-3 w-12 rounded-full md:mb-[2.5vw] md:h-5 md:w-16"
-        onClick={handlePreviousClick}
+        onClick={() => handlePreviousClick(ref, windowWidth)}
       >
         <Image
           src={prev.src}

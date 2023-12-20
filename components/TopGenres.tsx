@@ -1,5 +1,5 @@
 "use client";
-import { SpecificArtist } from "@/utils/types";
+import { SpecificArtist } from "@/types/types";
 import React, { useState, useEffect } from "react";
 
 interface TopGenreProps {

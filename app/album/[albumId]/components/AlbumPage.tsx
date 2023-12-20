@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import AlbumMain from "./AlbumMain";
-import { Album, Track } from "@/utils/types";
+import { Album, Track } from "@/types/types";
 import { getAlbum, getAlbumTracks } from "@/utils/fetchWebapi";
 import AlbumStats from "./AlbumStats";
 import AlbumTracks from "./AlbumTracks";
@@ -23,7 +23,7 @@ const AlbumPage: React.FC<Props> = ({ albumId, session }) => {
         const albumFetch = await getAlbum(albumId, session.accessToken);
         const albumTracksFetch = await getAlbumTracks(
           albumId,
-          session.accessToken
+          session.accessToken,
         );
         setAlbum(albumFetch);
         setTracks(albumTracksFetch);

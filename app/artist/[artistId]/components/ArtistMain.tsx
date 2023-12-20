@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import spotify from "@/public/assets/spotify.svg";
-import { SpecificArtist } from "@/utils/types";
+import { SpecificArtist } from "@/types/types";
 interface Props {
   artist: SpecificArtist;
 }
@@ -17,7 +17,7 @@ const ArtistMain: React.FC<Props> = ({ artist }) => {
         <Image
           priority
           src={artist?.images[0]?.url}
-          alt="album cover"
+          alt="Artist Image"
           width={artist?.images[0]?.width}
           height={artist?.images[0]?.height}
           className="rounded-xl"

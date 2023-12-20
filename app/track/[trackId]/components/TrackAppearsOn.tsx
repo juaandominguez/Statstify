@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Heading from "@/components/Heading";
-import { Track } from "@/utils/types";
+import { Track } from "@/types/types";
 interface Props {
   track: Track;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import Heading from "@/components/Heading";
-import { AudioFeatures } from "@/utils/types";
+import { AudioFeatures } from "@/types/types";
 import { audioFeatures } from "@/utils/AudioFeatures";
 import mapKeys from "@/utils/mapKeys";
 import { Radar } from "react-chartjs-2";

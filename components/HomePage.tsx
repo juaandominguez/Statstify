@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import TopTracks from "./TopTracks";
 import Heading from "./Heading";
 import TopGenres from "./TopGenres";
-import { Item, SpecificArtist, Track } from "@/utils/types";
+import { Item, SpecificArtist, Track } from "@/types/types";
 import TopArtists from "./TopArtists";
 import RecentlyPlayed from "./RecentlyPlayed";
 import {
@@ -11,7 +11,7 @@ import {
   getTopTracks,
   getTopArtists,
 } from "@/utils/fetchWebapi";
-import { TimeRange } from "@/utils/types";
+import { TimeRange } from "@/types/types";
 interface HomePageProps {
   session: any;
   timeRange: TimeRange;
@@ -53,8 +53,8 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
           timeRange === "short_term"
             ? "of the last month"
             : timeRange === "medium_term"
-            ? "of the last 6 months"
-            : ""
+              ? "of the last 6 months"
+              : ""
         }`}
       />
       <TopTracks topTracks={topTracks} />
@@ -64,8 +64,8 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
           timeRange === "short_term"
             ? "of the last month"
             : timeRange === "medium_term"
-            ? "of the last 6 months"
-            : ""
+              ? "of the last 6 months"
+              : ""
         }`}
       />
       <TopGenres topArtists={topArtists} />
@@ -75,8 +75,8 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
           timeRange === "short_term"
             ? "of the last month"
             : timeRange === "medium_term"
-            ? "of the last 6 months"
-            : ""
+              ? "of the last 6 months"
+              : ""
         }`}
       />
       <TopArtists topArtists={topArtists} />

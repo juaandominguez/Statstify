@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Album, SpecificArtist, Track } from "@/utils/types";
+import { Album, SpecificArtist, Track } from "@/types/types";
 import {
   getArtist,
   getArtistTopAlbums,
@@ -9,10 +9,10 @@ import {
 } from "@/utils/fetchWebapi";
 import Heading from "@/components/Heading";
 import ArtistMain from "./ArtistMain";
-import TrackCarrousel from "@/components/TrackCarrousel";
+import TrackCarrousel from "@/components/carrousels/TrackCarrousel";
 import ArtistInfo from "./ArtistInfo";
-import AlbumCarrousel from "@/components/AlbumCarrousel";
-import ArtistCarrousel from "@/components/ArtistCarrousel";
+import AlbumCarrousel from "@/components/carrousels/AlbumCarrousel";
+import ArtistCarrousel from "@/components/carrousels/ArtistCarrousel";
 
 interface TrackPageProps {
   artistId: string;

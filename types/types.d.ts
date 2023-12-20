@@ -207,3 +207,13 @@ export interface TrackNum {
   href: string;
   total: number;
 }
+
+export type CarrouselType = "album" | "artist" | "playlist" | "track";
+
+export interface CarrouselItem {
+  id: string;
+  image: string;
+  primary: string;
+  artists: Artist[];
+  type: CarrouselType;
+}

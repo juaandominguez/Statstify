@@ -1,4 +1,4 @@
-import { SpecificArtist } from "@/utils/types";
+import { SpecificArtist } from "@/types/types";
 import React from "react";
 import Heading from "@/components/Heading";
 interface Props {

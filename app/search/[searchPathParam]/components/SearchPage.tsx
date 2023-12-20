@@ -1,8 +1,8 @@
 "use client";
-import AlbumCarrousel from "@/components/AlbumCarrousel";
-import ArtistCarrousel from "@/components/ArtistCarrousel";
+import AlbumCarrousel from "@/components/carrousels/AlbumCarrousel";
+import ArtistCarrousel from "@/components/carrousels/ArtistCarrousel";
 import Heading from "@/components/Heading";
-import TrackCarrousel from "@/components/TrackCarrousel";
+import TrackCarrousel from "@/components/carrousels/TrackCarrousel";
 import { searchItems } from "@/utils/fetchWebapi";
 import React, { useEffect, useState } from "react";
 interface Props {

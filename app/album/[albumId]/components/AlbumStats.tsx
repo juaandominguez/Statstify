@@ -1,4 +1,4 @@
-import { Album } from "@/utils/types";
+import { Album } from "@/types/types";
 import React from "react";
 interface Props {
   album: Album;

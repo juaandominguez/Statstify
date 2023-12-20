@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import icon from "../public/assets/icon.png";
-import { TimeRange } from "@/utils/types";
+import { TimeRange } from "@/types/types";
 import SearchBar from "./SearchBar";
 import SearchIcon from "@mui/icons-material/Search";
 

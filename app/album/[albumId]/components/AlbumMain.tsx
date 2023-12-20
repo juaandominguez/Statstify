@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import spotify from "@/public/assets/spotify.svg";
-import { Album } from "@/utils/types";
+import { Album } from "@/types/types";
 interface Props {
   album: Album;
 }

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Artist, Track } from "@/utils/types";
+import { Artist, Track } from "@/types/types";
 import Image from "next/image";
 interface TopTracksProps {
   topTracks: Track[];

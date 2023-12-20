@@ -1,4 +1,4 @@
-import { Track } from "@/utils/types";
+import { Track } from "@/types/types";
 import React from "react";
 import Heading from "@/components/Heading";
 

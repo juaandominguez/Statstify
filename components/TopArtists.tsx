@@ -1,5 +1,5 @@
 "use client";
-import { SpecificArtist } from "@/utils/types";
+import { SpecificArtist } from "@/types/types";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 interface TopArtistsProps {
@@ -8,7 +8,7 @@ interface TopArtistsProps {
 
 const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
   const [currentTopArtists, setCurrentTopArtists] = useState<SpecificArtist[]>(
-    []
+    [],
   );
   const [page, setPage] = useState<number>(1);
   useEffect(() => {

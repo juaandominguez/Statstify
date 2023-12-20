@@ -1,4 +1,4 @@
-import { Track } from "@/utils/types";
+import { Track } from "@/types/types";
 import React from "react";
 import Image from "next/image";
 import spotify from "@/public/assets/spotify.svg";
@@ -16,7 +16,7 @@ const TrackMain: React.FC<Props> = ({ track }) => {
         <Image
           priority
           src={track?.album?.images[0]?.url}
-          alt="album cover"
+          alt="Track image"
           width={track?.album?.images[0]?.width}
           height={track?.album?.images[0]?.height}
         />

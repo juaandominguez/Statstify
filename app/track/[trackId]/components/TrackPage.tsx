@@ -7,10 +7,10 @@ import {
   getTrack,
   getTrackFeatures,
 } from "@/utils/fetchWebapi";
-import { AudioFeatures, Track } from "@/utils/types";
+import { AudioFeatures, Track } from "@/types/types";
 import Heading from "@/components/Heading";
 import React, { useEffect, useState } from "react";
-import TrackCarrousel from "@/components/TrackCarrousel";
+import TrackCarrousel from "@/components/carrousels/TrackCarrousel";
 import TrackStats from "./TrackStats";
 import TrackMain from "./TrackMain";
 import TrackAudioFeatures from "./TrackAudioFeatures";
