@@ -100,7 +100,6 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                         </div>
                         <a
                           href={`${process.env.NEXT_PUBLIC_URL}/album/${item.track.album.id}`}
-                          target="_blank"
                           className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
                           style={{
                             display: "-webkit-box",
