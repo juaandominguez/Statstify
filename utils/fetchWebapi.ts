@@ -129,7 +129,7 @@ async function getAlbum(albumId: string, token: string) {
 
 async function getAlbumTracks(albumId: string, token: string) {
   const tracks = await fetchWebApi(
-    `v1/albums/${albumId}/tracks?market=US`,
+    `v1/albums/${albumId}/tracks?market=US&limit=50`,
     "GET",
     token
   );
