@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
-import icon from "../public/assets/icon.png";
+import icon from "../public/assets/icon.webp";
 import SearchBar from "./SearchBar";
 import SearchIcon from "@mui/icons-material/Search";
 

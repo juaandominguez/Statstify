@@ -1,7 +1,7 @@
 import { Playlist } from "@/types/types";
 import React, { useRef } from "react";
-import next from "@/public/assets/next.png";
-import prev from "@/public/assets/prev.png";
+import next from "@/public/assets/next.webp";
+import prev from "@/public/assets/prev.webp";
 import Image from "next/image";
 import { handleNextClick, handlePreviousClick } from "@/utils/CarrouselScroll";
 interface Props {

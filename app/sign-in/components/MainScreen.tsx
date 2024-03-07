@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import spotify from "@/public/assets/spotify.svg";
 import spotifyhover from "@/public/assets/spotifyhover.svg";
-import divbg from "@/public/assets/divbg.png";
+import divbg from "@/public/assets/divbg.webp";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 
