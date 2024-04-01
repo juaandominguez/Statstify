@@ -16,6 +16,16 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "forest"],
+    themes: [
+      "light",
+      "dark",
+      {
+        forest: {
+          ...require("daisyui/src/theming/themes")["forest"],
+          primary: "green",
+          background: "#0F0F0F",
+        },
+      },
+    ],
   },
 };

@@ -38,7 +38,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
   };
   return (
     <>
-      {tracks.length > 0 ? (
+      {tracks?.length > 0 ? (
         <div className="mt-6 sm:mx-10 md:mx-20">
           {tracks?.map((item, index) => {
             const date = item.played_at.substring(0, 10);

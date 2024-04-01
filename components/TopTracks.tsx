@@ -31,7 +31,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
 
   return (
     <>
-      {currentTopTracks.length > 0 ? (
+      {currentTopTracks?.length > 0 ? (
         <section>
           <div className="mr-[12vw] mt-2 flex justify-end">
             {topTracks && (

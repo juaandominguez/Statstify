@@ -56,13 +56,13 @@ const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      <div className="navbar justify-between bg-base-100">
+      <div className="navbar justify-between">
         {isExpanded ? (
           <SearchBar isExpanded={isExpanded} setIsExpanded={setIsExpanded} />
         ) : (
           <>
             <div className="ml-4" onClick={() => (window.location.href = "/")}>
-              <a className="btn-ghost btn flex text-xl normal-case text-primary">
+              <a className="btn-ghost btn flex text-xl normal-case text-[#639F28]">
                 Statstify{" "}
                 <Image
                   src={icon.src}

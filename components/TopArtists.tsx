@@ -8,7 +8,7 @@ interface TopArtistsProps {
 
 const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
   const [currentTopArtists, setCurrentTopArtists] = useState<SpecificArtist[]>(
-    [],
+    []
   );
   const [page, setPage] = useState<number>(1);
   useEffect(() => {
@@ -33,7 +33,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
 
   return (
     <>
-      {topArtists.length > 0 ? (
+      {topArtists?.length > 0 ? (
         <section>
           <div className="mr-[12vw] mt-2 flex justify-end">
             {topArtists && (

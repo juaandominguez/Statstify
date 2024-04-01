@@ -5,3 +5,15 @@
 html {
   font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+[data-theme="forest"] .btn {
+  border-radius: 20px;
+  border-color: #0f0f0f;
+  background-color: #0f0f0f;
+}
+
+[data-theme="forest"] .input {
+  border-radius: 20px;
+  border-color: #0f0f0f;
+  background-color: #0f0f0f;
+}
