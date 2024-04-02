@@ -35,12 +35,12 @@ const MainScreen = () => {
       </div>
       {/* <h4 className={subtitleStyle}>See your Spotify stats here!</h4> */}
       <button
-        className="btn-outline btn text-xl"
+        className="btn-outline flex items-center justify-center space-x-6 rounded-full border-2 border-white px-10 py-2 text-2xl font-semibold transition duration-300 ease-in-out hover:bg-white hover:text-black"
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
         onClick={handleCLick}
       >
-        Sign in using Spotify
+        <h2>Sign in using Spotify</h2>
         <div className="inline">
           {isHovered ? (
             <Image
