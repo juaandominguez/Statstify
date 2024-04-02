@@ -67,8 +67,6 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - name: Install dependencies
-        run: bun install
       - name: Install Vercel CLI
         run: bun install --global vercel@canary
       - name: Pull Vercel Environment Information
@@ -91,8 +89,6 @@ jobs:
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - name: Install dependencies
-        run: bun install
       - name: Install Vercel CLI
         run: bun install --global vercel@canary
       - name: Pull Vercel Environment Information
