@@ -56,6 +56,10 @@ jobs:
 
   deploy_preview:
     needs: test
+    environment:
+      name: Preview
+      url: ${{ steps.deploy_step.outputs.url }}
+    if: ${{github.event_name == 'push'}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -72,18 +76,9 @@ jobs:
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> "$GITHUB_OUTPUT"
-
-  deploy_preview_url:
-    needs: deploy_preview
-    runs-on: ubuntu-latest
-    environment:
-      name: Preview
-      url: ${{ steps.deploy_preview.outputs.url }}
-    steps:
-      - name: Output Preview URL
-        run: echo "Added URL to the preview environment."
+      
+      - id: deploy_step
+        run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
 
   deploy_production:
     needs: test
