@@ -81,6 +81,9 @@ jobs:
     environment:
       name: Preview
       url: ${{ steps.deploy_preview.outputs.url }}
+    steps:
+      - name: Output Preview URL
+        run: echo "Added URL to the preview environment."
 
   deploy_production:
     needs: test
