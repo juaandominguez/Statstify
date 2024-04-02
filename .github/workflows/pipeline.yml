@@ -56,7 +56,9 @@ jobs:
 
   deploy_preview:
     needs: test
-    environment: Preview
+    environment:
+      name: Preview
+      url: ${{ steps.deploy_preview.outputs.url }}
     if: ${{github.event_name == 'push'}}
     runs-on: ubuntu-latest
     steps:
@@ -79,7 +81,9 @@ jobs:
 
   deploy_production:
     needs: test
-    environment: Production
+    environment:
+      name: Production
+      url: ${{ steps.deploy_production.outputs.url }}
     if: ${{github.event_name == 'push'}}
     runs-on: ubuntu-latest
     steps:
