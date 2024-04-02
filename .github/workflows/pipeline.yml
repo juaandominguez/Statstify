@@ -77,13 +77,13 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} >> $GITHUB_OUTPUT
 
   deploy_production:
     needs: test
     environment:
       name: Production
-      url: ${{ steps.deploy_production.outputs.url }}
+      url: https://statstify.vercel.app
     if: ${{github.event_name == 'push'}}
     runs-on: ubuntu-latest
     steps:
