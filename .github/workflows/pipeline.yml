@@ -54,8 +54,11 @@ jobs:
       - name: Run tests
         run: bun run test
 
-  build_preview:
+  deploy_preview:
     needs: unit_tests
+    environment:
+      name: Preview
+      url: ${{ steps.deploy_step.outputs.url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -72,101 +75,11 @@ jobs:
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: preview-artifact
-          path: .next
-          if-no-files-found: error
-          overwrite: true
-
-  build_production:
-    needs: unit_tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install Vercel CLI
-        run: bun install --global vercel@canary
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: production-artifact
-          path: .next
-          if-no-files-found: error
-          overwrite: true
-
-  e2e_tests:
-    needs: build_production
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Download preview artifact
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: preview-artifact
-          path: .next
-      - name: Download production artifact
-        if: ${{ github.event_name == 'push' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: production-artifact
-          path: .next
-      - name: Start server
-        run: bun run start
-      - name: Install dependencies for E2E tests
-        run: bun i ci
-      - name: Install Playwright Browsers
-        run: bunx playwright install --with-deps
-      - name: Run E2E tests
-        run: bunx test:e2e
-
-  deploy_preview:
-    needs: build_preview
-    environment:
-      name: Preview
-      url: ${{ steps.deploy_step.outputs.url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Setup bun
-        uses: oven-sh/setup-bun@v1
-        with:
-          bun-version: latest
-      - name: Install Vercel CLI
-        run: bun install --global vercel@canary
-      - name: Download preview artifact
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: preview-artifact
-          path: .next
       - id: deploy_step
         run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
 
   deploy_production:
-    needs: [e2e_tests, build_production]
+    needs: unit_tests
     environment:
       name: Production
       url: https://statstify.vercel.app
@@ -183,11 +96,23 @@ jobs:
           bun-version: latest
       - name: Install Vercel CLI
         run: bun install --global vercel@canary
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Download production artifact
         if: ${{ github.event_name == 'pull_request' }}
         uses: actions/download-artifact@v4
         with:
           name: production-artifact
           path: .next
+      - name: Start server
+        run: bun run start
+      - name: Install dependencies for E2E tests
+        run: bun i ci
+      - name: Install Playwright Browsers
+        run: bunx playwright install --with-deps
+      - name: Run E2E tests
+        run: bunx test:e2e
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
