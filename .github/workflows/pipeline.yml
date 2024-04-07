@@ -73,7 +73,7 @@ jobs:
         run: bun install --global vercel@canary
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
+      - name: Build Project
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - id: deploy_step
         run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
@@ -98,7 +98,7 @@ jobs:
         run: bun install --global vercel@canary
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
+      - name: Build Project
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Start server
         run: bun run start &
@@ -107,6 +107,6 @@ jobs:
       - name: Install Playwright Browsers
         run: bunx playwright install --with-deps
       - name: Run E2E tests
-        run: bunx test:e2e
-      - name: Deploy Project Artifacts to Vercel
+        run: bunx playwright test
+      - name: Deploy Project to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

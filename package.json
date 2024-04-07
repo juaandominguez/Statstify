@@ -11,8 +11,7 @@
     "prepare": "husky install",
     "lint:write": "next lint --cache --fix",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:e2e": "playwright test"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
