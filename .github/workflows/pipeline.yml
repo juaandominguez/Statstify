@@ -107,7 +107,7 @@ jobs:
           overwrite: true
 
   e2e_tests:
-    needs: [build_preview, build_production]
+    needs: build_production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
