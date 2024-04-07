@@ -7,7 +7,7 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 
 const h1Style =
-  "text-7xl xl:text-8xl font-bold md:text-left text-center text-white";
+  "text-7xl md:text-8xl font-bold md:text-left text-center text-white antialiased tracking-tighter text-balance";
 const MainScreen = () => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -35,7 +35,7 @@ const MainScreen = () => {
       </div>
       {/* <h4 className={subtitleStyle}>See your Spotify stats here!</h4> */}
       <button
-        className="btn-outline flex items-center justify-center space-x-6 rounded-full border-2 border-white px-10 py-2 text-2xl font-semibold transition duration-300 ease-in-out hover:bg-white hover:text-black"
+        className="hover:bg btn-outline flex items-center justify-center space-x-6 rounded-full  border-2 px-10 py-2 text-2xl font-semibold transition duration-300 ease-in-out hover:text-black"
         onMouseOver={() => setIsHovered(true)}
         onMouseOut={() => setIsHovered(false)}
         onClick={handleCLick}
