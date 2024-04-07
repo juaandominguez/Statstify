@@ -100,14 +100,8 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Download production artifact
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: production-artifact
-          path: .next
       - name: Start server
-        run: bun run start
+        run: bun run start &
       - name: Install dependencies for E2E tests
         run: bun i ci
       - name: Install Playwright Browsers
