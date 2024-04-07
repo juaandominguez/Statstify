@@ -107,7 +107,7 @@ jobs:
           overwrite: true
 
   e2e_tests:
-    needs: lint
+    needs: [build_preview, build_production]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -125,13 +125,19 @@ jobs:
           name: preview-artifact
           path: .next
       - name: Download production artifact
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'push' }}
         uses: actions/download-artifact@v4
         with:
           name: production-artifact
           path: .next
       - name: Start server
         run: bun run start
+      - name: Install dependencies for E2E tests
+        run: bun i ci
+      - name: Install Playwright Browsers
+        run: bunx playwright install --with-deps
+      - name: Run E2E tests
+        run: bunx test:e2e
 
   deploy_preview:
     needs: build_preview
@@ -160,7 +166,7 @@ jobs:
         run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
 
   deploy_production:
-    needs: e2e_tests
+    needs: [e2e_tests, build_production]
     environment:
       name: Production
       url: https://statstify.vercel.app
