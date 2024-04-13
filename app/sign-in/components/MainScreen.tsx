@@ -34,33 +34,41 @@ const MainScreen = () => {
         </h1>
       </div>
       {/* <h4 className={subtitleStyle}>See your Spotify stats here!</h4> */}
-      <button
-        className="hover:bg btn-outline flex items-center justify-center space-x-6 rounded-full  border-2 px-10 py-2 text-2xl font-semibold transition duration-300 ease-in-out hover:text-black"
-        onMouseOver={() => setIsHovered(true)}
-        onMouseOut={() => setIsHovered(false)}
-        onClick={handleCLick}
-      >
-        <h2>Sign in using Spotify</h2>
-        <div className="inline">
-          {isHovered ? (
-            <Image
-              src={spotifyhover.src}
-              alt="Spotify logo"
-              className="h-6 w-6 transition duration-1000"
-              width={24}
-              height={24}
-            />
-          ) : (
-            <Image
-              src={spotify.src}
-              alt="Spotify logo"
-              className="h-6 w-6 transition duration-1000"
-              width={24}
-              height={24}
-            />
-          )}
-        </div>
-      </button>
+      <div className="space-y-3">
+        <button
+          className="hover:bg btn-outline flex items-center justify-center space-x-6 rounded-full  border-2 px-10 py-2 text-2xl font-semibold transition duration-300 ease-in-out hover:text-black"
+          onMouseOver={() => setIsHovered(true)}
+          onMouseOut={() => setIsHovered(false)}
+          onClick={handleCLick}
+        >
+          <h2>Sign in using Spotify</h2>
+          <div className="inline">
+            {isHovered ? (
+              <Image
+                src={spotifyhover.src}
+                alt="Spotify logo"
+                className="h-6 w-6 transition duration-1000"
+                width={24}
+                height={24}
+              />
+            ) : (
+              <Image
+                src={spotify.src}
+                alt="Spotify logo"
+                className="h-6 w-6 transition duration-1000"
+                width={24}
+                height={24}
+              />
+            )}
+          </div>
+        </button>
+        <a
+          className="hover:bg btn-outline flex w-[120px] cursor-pointer items-center justify-center space-x-6  rounded-full border-2 px-10 py-2 text-lg font-semibold transition duration-300 ease-in-out hover:text-black"
+          href="/demo"
+        >
+          Demo
+        </a>
+      </div>
       {/* {import gif} */}
     </div>
   );
