@@ -13,7 +13,7 @@ const AlbumTracks: React.FC<Props> = ({ tracks }) => {
       <article className="grid w-[100%] grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {tracks?.map((track, index) => (
           <div
-            key={index}
+            key={track?.id}
             className="flex flex-row items-center justify-center"
           >
             <div className="m-5 flex w-60 flex-row justify-start">

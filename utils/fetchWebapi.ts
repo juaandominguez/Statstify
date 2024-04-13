@@ -1,4 +1,5 @@
 import {
+  TimeRange,
   TrackCall,
   ArtistCall,
   RecentlyPlayedCall,
@@ -7,7 +8,6 @@ import {
   AudioFeatures,
   Album,
 } from "../types/types";
-import { TimeRange } from "../types/types";
 async function fetchWebApi(
   endpoint: string,
   method: string,

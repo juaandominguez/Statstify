@@ -38,6 +38,7 @@ const MainScreen = () => {
         <button
           className="hover:bg btn-outline flex items-center justify-center space-x-6 rounded-full  border-2 px-10 py-2 text-2xl font-semibold transition duration-300 ease-in-out hover:text-black"
           onMouseOver={() => setIsHovered(true)}
+          onFocus={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
           onClick={handleCLick}
         >

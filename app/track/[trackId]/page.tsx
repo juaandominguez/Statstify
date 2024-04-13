@@ -4,8 +4,7 @@ import React from "react";
 import TrackPage from "./components/TrackPage";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-const page = ({ params }: { params: { trackId: string } }) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Page = ({ params }: { params: { trackId: string } }) => {
   const { data: session, status } = useSession();
   if (status === "unauthenticated") redirect("/sign-in");
   if (status === "loading") {
@@ -23,4 +22,4 @@ const page = ({ params }: { params: { trackId: string } }) => {
   );
 };
 
-export default page;
+export default Page;

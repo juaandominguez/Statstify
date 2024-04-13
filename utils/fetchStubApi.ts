@@ -1,5 +1,9 @@
-import { TrackCall, ArtistCall, RecentlyPlayedCall } from "../types/types";
-import { TimeRange } from "../types/types";
+import {
+  TimeRange,
+  TrackCall,
+  ArtistCall,
+  RecentlyPlayedCall,
+} from "../types/types";
 async function fetchWebApi(endpoint: string, method: string, body?: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/${endpoint}`, {
     method,

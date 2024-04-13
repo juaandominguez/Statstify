@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import TopTracks from "./TopTracks";
 import Heading from "./Heading";
 import TopGenres from "./TopGenres";
-import { Item, SpecificArtist, Track } from "@/types/types";
+import { TimeRange, Item, SpecificArtist, Track } from "@/types/types";
 import TopArtists from "./TopArtists";
 import RecentlyPlayed from "./RecentlyPlayed";
 import {
@@ -11,7 +11,6 @@ import {
   getTopTracks,
   getTopArtists,
 } from "@/utils/fetchWebapi";
-import { TimeRange } from "@/types/types";
 interface HomePageProps {
   session: any;
   timeRange: TimeRange;
@@ -26,7 +25,6 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
 
   useEffect(() => {
     (async function getTop() {
-      // setIsLoading(true);
       const topTracks = await getTopTracks(token, timeRange);
       setTopTracks(topTracks);
       const topArtists = await getTopArtists(token, timeRange);
@@ -45,39 +43,31 @@ const HomePage: React.FC<HomePageProps> = ({ session, timeRange }) => {
     );
   }
 
+  const getDescription = () => {
+    if (timeRange === "short_term") {
+      return "of the last month";
+    } else if (timeRange === "medium_term") {
+      return "of the last 6 months";
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div className="mt-10">
       <Heading
         title="Top Tracks"
-        description={`Your top tracks ${
-          timeRange === "short_term"
-            ? "of the last month"
-            : timeRange === "medium_term"
-              ? "of the last 6 months"
-              : ""
-        }`}
+        description={`Your top tracks ${getDescription()}`}
       />
       <TopTracks topTracks={topTracks} />
       <Heading
         title="Top Genres"
-        description={`Your top genres ${
-          timeRange === "short_term"
-            ? "of the last month"
-            : timeRange === "medium_term"
-              ? "of the last 6 months"
-              : ""
-        }`}
+        description={`Your top genres ${getDescription()}`}
       />
       <TopGenres topArtists={topArtists} />
       <Heading
         title="Top Artists"
-        description={`Your top artists ${
-          timeRange === "short_term"
-            ? "of the last month"
-            : timeRange === "medium_term"
-              ? "of the last 6 months"
-              : ""
-        }`}
+        description={`Your top artists ${getDescription()}`}
       />
       <TopArtists topArtists={topArtists} />
       <Heading

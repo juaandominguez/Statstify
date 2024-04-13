@@ -18,8 +18,8 @@ const TrackAudioFeatures: React.FC<Props> = ({ trackFeatures }) => {
       <article className="mt-6 flex w-full flex-row flex-wrap items-center justify-around">
         <div className="flex flex-col">
           <div className="grid w-full grid-cols-2 gap-4">
-            {audioFeatures.map((feature: string, index) => (
-              <div className="flex flex-col" key={index}>
+            {audioFeatures.map((feature: string) => (
+              <div className="flex flex-col" key={feature}>
                 <p className="font-semibold">
                   {feature.charAt(0).toUpperCase() + feature.slice(1)}
                 </p>

@@ -13,11 +13,7 @@ const Page = () => {
       </div>
     );
   }
-  return (
-    <>
-      <MainScreen />
-    </>
-  );
+  return <MainScreen />;
 };
 
 export default Page;

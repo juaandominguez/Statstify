@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { mockArtist } from "@/data/mock";
 
 export function GET(req: Request) {
-  let url = new URL(req.url!);
+  let url = new URL(req.url);
   let searchParams = url.searchParams;
   let limit = searchParams.get("limit");
   let artists = [];

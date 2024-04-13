@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AlbumMain from "./AlbumMain";
 import { Album, Track } from "@/types/types";
 import { getAlbum, getAlbumTracks } from "@/utils/fetchWebapi";

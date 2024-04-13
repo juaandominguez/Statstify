@@ -13,25 +13,26 @@ interface Genre {
 const TopGenres: React.FC<TopGenreProps> = ({ topArtists }) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   useEffect(() => {
+    const countGenres = (genres: Genre[], genre: string) => {
+      const index = genres.findIndex((g) => g.name === genre);
+      if (index === -1) {
+        genres.push({ name: genre, count: 1 });
+      } else {
+        genres[index].count++;
+      }
+    };
+
     const getTopGenres = () => {
       const genres: Genre[] = [];
-      {
-        topArtists?.map((artist) => {
-          artist.genres?.map((genre) => {
-            const index = genres.findIndex((g) => g.name === genre);
-            if (index === -1) {
-              genres.push({ name: genre, count: 1 });
-            } else {
-              genres[index].count++;
-            }
-          });
+      topArtists?.forEach((artist) => {
+        artist.genres?.forEach((genre) => {
+          countGenres(genres, genre);
         });
-      }
-      genres.sort((a, b) => {
-        return a.count > b.count ? -1 : 1;
       });
+      genres.sort((a, b) => (a.count > b.count ? -1 : 1));
       return genres;
     };
+
     setGenres(getTopGenres());
   }, [topArtists]);
 

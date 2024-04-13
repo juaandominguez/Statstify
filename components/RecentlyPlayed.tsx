@@ -40,14 +40,14 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
     <>
       {tracks?.length > 0 ? (
         <div className="mt-6 sm:mx-10 md:mx-20">
-          {tracks?.map((item, index) => {
+          {tracks?.map((item) => {
             const date = item.played_at.substring(0, 10);
             const shouldShowDate = date !== prevDate;
             prevDate = date;
 
             return (
               <div
-                key={index}
+                key={`${item.track.id} at ${item.played_at}`}
                 className=" mb-3 border-b border-b-gray-500 pb-3"
               >
                 {shouldShowDate && (
