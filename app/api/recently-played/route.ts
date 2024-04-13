@@ -1,8 +1,7 @@
-import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 import { mockRecentTracks } from "@/data/mock";
 
-export function GET(req: NextApiRequest) {
+export function GET(req: Request) {
   let url = new URL(req.url!);
   let searchParams = url.searchParams;
   let limit = searchParams.get("limit");
