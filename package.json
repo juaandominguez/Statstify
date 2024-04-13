@@ -1,6 +1,6 @@
 {
   "name": "statstify",
-  "description": "Statstify is a web application that allows you to view your Spotify statistics.",
+  "description": "Statstify is a web app where you can see your Spotify statistics for free!.",
   "version": "0.1.0",
   "private": true,
   "scripts": {
