@@ -44,7 +44,7 @@ const HomePage: React.FC<HomePageProps> = ({ timeRange }) => {
   }
 
   return (
-    <div className="mt-10">
+    <div className="mt-24">
       <Heading
         title="Top Tracks"
         description={`Your top tracks ${
