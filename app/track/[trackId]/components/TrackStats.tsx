@@ -10,7 +10,7 @@ const TrackStats: React.FC<Props> = ({ track }) => {
         <h5 className="text-xl font-bold text-white">
           {track?.album?.release_date}
         </h5>
-        <p className="font-semibold">Release date</p>
+        <p className="text-center font-semibold">Release date</p>
       </div>
       <div className="mx-auto my-5 flex w-48 flex-col items-center justify-center md:mx-0 md:w-[17vw]">
         <h5 className="text-xl font-bold text-white">{`${Math.floor(
@@ -22,19 +22,19 @@ const TrackStats: React.FC<Props> = ({ track }) => {
             useGrouping: false,
           },
         )}`}</h5>
-        <p className="font-semibold">Track length</p>
+        <p className="text-center font-semibold">Track length</p>
       </div>
       <div className="mx-auto my-5 flex w-48 flex-col items-center justify-center md:mx-0 md:w-[17vw]">
         <h5 className="text-xl font-bold text-white">
           {track?.popularity / 10}
         </h5>
-        <p className="font-semibold">0-10 Popularity</p>
+        <p className="text-center font-semibold">0-10 Popularity</p>
       </div>
       <div className="mx-auto my-5 flex w-48 flex-col items-center justify-center md:mx-0 md:w-[17vw]">
         <h5 className="text-xl font-bold text-white">
           {track?.explicit ? "Yes" : "No"}
         </h5>
-        <p className="font-semibold">Explicit</p>
+        <p className="text-center font-semibold">Explicit</p>
       </div>
     </section>
   );

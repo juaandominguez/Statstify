@@ -5,6 +5,7 @@ import Heading from "@/components/Heading";
 import TrackCarrousel from "@/components/carrousels/TrackCarrousel";
 import { searchItems } from "@/utils/fetchWebapi";
 import React, { useEffect, useState } from "react";
+import PlaylistCarrousel from "@/components/carrousels/PlaylistCarrousel";
 interface Props {
   searchPathParam: string;
   session: any;
@@ -81,6 +82,17 @@ const SearchPage: React.FC<Props> = ({ searchPathParam, session }) => {
         <AlbumCarrousel
           windowWidth={windowWidth}
           albums={searchResults?.albums?.items}
+        />
+      </section>
+      <section className="flex w-full flex-col items-start justify-start">
+        <Heading
+          title="Playlists"
+          description={`Playlists including ${searchPathParam}`}
+          margin={false}
+        />
+        <PlaylistCarrousel
+          windowWidth={windowWidth}
+          playlists={searchResults?.playlists?.items}
         />
       </section>
     </article>

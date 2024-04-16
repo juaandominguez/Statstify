@@ -34,7 +34,6 @@ const PlaylistCarrousel: React.FC<Props> = ({ windowWidth, playlists }) => {
             {playlist?.name}
           </p>
           <p className="line-clamp-1 max-w-[20vw] text-xs font-semibold text-gray-400 md:text-base">
-            {playlist?.description}
             {playlist?.owner?.display_name}
           </p>
         </div>

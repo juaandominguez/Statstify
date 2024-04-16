@@ -4,35 +4,53 @@ import Tier from "./Tier";
 import Equal from "@/icons/Equal";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import { animations } from "@formkit/drag-and-drop";
-import { getAlbum, getAlbumTracks } from "@/utils/fetchWebapi";
-import { TierTrack } from "@/types/types";
+import { getAlbum, getAlbumTracks, getPlaylist } from "@/utils/fetchWebapi";
+import { TierTrack, TierType } from "@/types/types";
 
 let tiersInput = ["Top", "Very Good", "Mid", "Bad"];
 
 interface TierProps {
-  albumId: string;
+  tierType: TierType;
+  id: string;
   session: any;
 }
-const Tiers: React.FC<TierProps> = ({ albumId, session }) => {
+const Tiers: React.FC<TierProps> = ({ id, session, tierType }) => {
   const [items, setItems] = useState<TierTrack[][]>();
-  const [albumName, setAlbumName] = useState<string>();
+  const [name, setName] = useState<string>();
   const [list, tiers] = useDragAndDrop<HTMLUListElement, string>(tiersInput, {
     dragHandle: ".tier-handle",
     plugins: [animations()],
   });
+
   useEffect(() => {
-    (async () => {
-      const album = await getAlbum(albumId, session.accessToken);
-      const response = await getAlbumTracks(albumId, session.accessToken);
+    const getTrackFromAlbum = async () => {
+      const album = await getAlbum(id, session.accessToken);
+      const response = await getAlbumTracks(id, session.accessToken);
       const tracks = response.map((track) => ({
         id: track.id,
         name: track.name,
         image: album?.images[2]?.url,
       }));
       setItems([tracks]);
-      setAlbumName(album?.name);
-    })();
-  }, [albumId, session.accessToken]);
+      setName(album?.name);
+    };
+
+    const getTrackFromPlaylist = async () => {
+      const playlist = await getPlaylist(id, session.accessToken);
+      const tracks = playlist?.tracks?.items.map((track) => ({
+        id: track.track?.id,
+        name: track.track?.name,
+        image: track.track?.album?.images[2]?.url,
+      }));
+      setItems([tracks]);
+      setName(playlist?.name);
+    };
+    if (tierType == "album") {
+      getTrackFromAlbum();
+    } else {
+      getTrackFromPlaylist();
+    }
+  }, [id, session.accessToken, tierType]);
 
   return (
     <div className="flex w-full flex-col">
@@ -48,10 +66,12 @@ const Tiers: React.FC<TierProps> = ({ albumId, session }) => {
           </li>
         ))}
       </ul>
-      {items && (
+      {items ? (
         <div className="mt-10">
-          <Tier items={items[0] || []} name={albumName || "Album"} />
+          <Tier items={items[0] || []} name={name || "Album"} />
         </div>
+      ) : (
+        <p className="mt-10 text-center text-lg">Loading tracks...</p>
       )}
     </div>
   );

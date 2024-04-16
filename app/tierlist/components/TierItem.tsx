@@ -7,8 +7,10 @@ interface TierItemProps {
 }
 
 const TierItem: React.FC<TierItemProps> = ({ item }) => {
+  document.body.style.overflow = "auto";
+
   return (
-    <div className="draggable-item flex cursor-pointer flex-col items-center ">
+    <div className="draggable-item flex cursor-pointer flex-col items-center">
       <Image
         src={item.image}
         alt={item.name}

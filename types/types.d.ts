@@ -223,3 +223,73 @@ export interface TierTrack {
   image: string;
   name: string;
 }
+
+export interface PlaylistCall {
+  collaborative: boolean;
+  description: string;
+  external_urls: ExternalUrls;
+  followers: Followers;
+  href: string;
+  id: string;
+  images: Image[];
+  name: string;
+  owner: PlaylistOwner;
+  public: boolean;
+  snapshot_id: string;
+  tracks: Tracks;
+  type: string;
+  uri: string;
+}
+
+export interface PlaylistOwner {
+  external_urls: ExternalUrls;
+  followers?: Followers;
+  href: string;
+  id: string;
+  type: string;
+  uri: string;
+  display_name?: string;
+  name?: string;
+}
+
+export interface Tracks {
+  href: string;
+  limit: number;
+  next: string;
+  offset: number;
+  previous: string;
+  total: number;
+  items: PlaylistItem[];
+}
+
+export interface PlaylistItem {
+  added_at: string;
+  added_by: Owner;
+  is_local: boolean;
+  track: PlaylistTrack;
+}
+
+export interface PlaylistTrack {
+  album: Album;
+  artists: Artist[];
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
+  external_ids: ExternalIDS;
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  is_playable: boolean;
+  linked_from: any;
+  restrictions: Restrictions;
+  name: string;
+  popularity: number;
+  preview_url: string;
+  track_number: number;
+  type: string;
+  uri: string;
+  is_local: boolean;
+}
+
+export type TierType = "album" | "playlist";

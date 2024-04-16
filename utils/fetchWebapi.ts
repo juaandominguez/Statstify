@@ -7,6 +7,7 @@ import {
   Track,
   AudioFeatures,
   Album,
+  PlaylistCall,
 } from "../types/types";
 async function fetchWebApi(
   endpoint: string,
@@ -136,6 +137,24 @@ async function getAlbumTracks(albumId: string, token: string) {
   return tracks.items as Track[];
 }
 
+async function getPlaylist(playlistId: string, token: string) {
+  const playlist = await fetchWebApi(
+    `v1/playlists/${playlistId}?market=US`,
+    "GET",
+    token,
+  );
+  while (playlist.tracks.next) {
+    const nextTracks = await fetchWebApi(
+      playlist.tracks.next.replace("https://api.spotify.com/", ""),
+      "GET",
+      token,
+    );
+    playlist.tracks.items = playlist.tracks.items.concat(nextTracks.items);
+    playlist.tracks.next = nextTracks.next;
+  }
+  return playlist as PlaylistCall;
+}
+
 export {
   getTopTracks,
   getTopArtists,
@@ -150,4 +169,5 @@ export {
   searchItems,
   getAlbum,
   getAlbumTracks,
+  getPlaylist,
 };

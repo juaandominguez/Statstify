@@ -12,7 +12,7 @@ const ArtistInfo: React.FC<Props> = ({ artist }) => {
           <h5 className="text-xl font-bold text-white">
             {artist?.popularity / 10}
           </h5>
-          <p className="font-semibold">0-10 Popularity</p>
+          <p className="text-center font-semibold">0-10 Popularity</p>
         </div>
       </section>
       <section className="mt-3 flex w-full flex-col justify-start md:mt-10">
