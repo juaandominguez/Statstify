@@ -14,5 +14,5 @@ test("Login page", async ({ page }) => {
 
   await page.goto("http://localhost:3000/random");
 
-  await expect(page).toHaveTitle(/404/);
+  await expect(page).toHaveTitle(/Statstify/);
 });
