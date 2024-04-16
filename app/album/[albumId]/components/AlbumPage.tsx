@@ -48,7 +48,7 @@ const AlbumPage: React.FC<Props> = ({ albumId, session }) => {
   }
   return (
     <article className="m-10 flex w-[80vw] flex-col items-center justify-center">
-      <AlbumMain album={album} />
+      <AlbumMain album={album} albumId={albumId} />
       <AlbumStats album={album} />
       <AlbumTracks tracks={tracks} />
     </article>

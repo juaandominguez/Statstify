@@ -35,3 +35,4 @@ Statstify provides users with a simple and intuitive interface to view their top
 - Tracks: View the main characteristics of each song, and recommended similiar tracks.
 - Artists: View the top tracks and albums of each artist, and recommended similiar artists.
 - Search: Find your favourite track, artists and albums in a easy and intuitive manner.
+- Tier List: Coming soon...

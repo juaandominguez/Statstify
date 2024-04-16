@@ -217,3 +217,9 @@ export interface CarrouselItem {
   artists: Artist[];
   type: CarrouselType;
 }
+
+export interface TierTrack {
+  id: string;
+  image: string;
+  name: string;
+}
