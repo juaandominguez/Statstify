@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Tier from "./Tier";
-import Equal from "@/icons/Equal";
 import { useDragAndDrop } from "@formkit/drag-and-drop/react";
 import { animations } from "@formkit/drag-and-drop";
 import { getAlbum, getAlbumTracks, getPlaylist } from "@/utils/fetchWebapi";
 import { TierTrack, TierType } from "@/types/types";
+import Grabber from "@/icons/Grabber";
 
 let tiersInput = ["Top", "Very Good", "Mid", "Bad"];
 
@@ -61,7 +61,7 @@ const Tiers: React.FC<TierProps> = ({ id, session, tierType }) => {
             data-label={tier}
             className="mt-4 flex h-full w-full flex-row items-center justify-center space-x-4"
           >
-            <Equal className="tier-handle h-[36px] w-[36px] cursor-pointer" />
+            <Grabber className="tier-handle h-[30px] w-[30px] cursor-pointer" />
             <Tier items={[]} name={tier} />
           </li>
         ))}
