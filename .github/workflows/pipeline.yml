@@ -89,7 +89,14 @@ jobs:
           REPOSITORY: statstify
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
+          docker build \
+          --build-arg SPOTIFY_BASE_API_URL=${{ vars.SPOTIFY_BASE_API_URL }} \
+          --build-arg SPOTIFY_CLIENT_ID=${{ secrets.SPOTIFY_CLIENT_ID }} \
+          --build-arg SPOTIFY_CLIENT_SECRET=${{ secrets.SPOTIFY_CLIENT_SECRET }} \
+          --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} \
+          --build-arg NEXTAUTH_URL=${{ vars.NEXTAUTH_URL }} \
+          --build-arg NEXT_PUBLIC_URL=${{ vars.NEXT_PUBLIC_URL }} \
+          -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
 
   deploy_preview:
