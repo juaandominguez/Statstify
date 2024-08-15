@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get --no-install-recommends install -y \
+RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     bash \
