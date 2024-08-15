@@ -10,7 +10,7 @@ RUN apt-get update && apt-get --no-install-recommends install -y \
     bash \
     git
 
-RUN curl --proto "=https" -fsSL https://bun.sh/install | bash
+RUN curl -fsSL https://bun.sh/install | bash
 
 ENV PATH="/root/.bun/bin:${PATH}"
 
