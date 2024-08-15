@@ -89,22 +89,8 @@ jobs:
           REPOSITORY: statstify
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          echo "${{ vars.SPOTIFY_BASE_API_URL }}" > spotify_base_api_url.secret
-          echo "${{ secrets.SPOTIFY_CLIENT_ID }}" > spotify_client_id.secret
-          echo "${{ secrets.SPOTIFY_CLIENT_SECRET }}" > spotify_client_secret.secret
-          echo "${{ secrets.NEXTAUTH_SECRET }}" > nextauth_secret.secret
-          echo "${{ vars.NEXTAUTH_URL }}" > nextauth_url.secret
-          echo "${{ vars.NEXT_PUBLIC_URL }}" > next_public_url.secret
-
           docker build \
-            --secret id=SPOTIFY_BASE_API_URL,src=spotify_base_api_url.secret \
-            --secret id=SPOTIFY_CLIENT_ID,src=spotify_client_id.secret \
-            --secret id=SPOTIFY_CLIENT_SECRET,src=spotify_client_secret.secret \
-            --secret id=NEXTAUTH_SECRET,src=nextauth_secret.secret \
-            --secret id=NEXTAUTH_URL,src=nextauth_url.secret \
-            --secret id=NEXT_PUBLIC_URL,src=next_public_url.secret \
             -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
-
           docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
 
   deploy_preview:

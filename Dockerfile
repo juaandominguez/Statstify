@@ -16,12 +16,11 @@ ENV PATH="/root/.bun/bin:${PATH}"
 
 RUN bun install
 
-RUN --mount=type=secret,id=SPOTIFY_BASE_API_URL \
-    --mount=type=secret,id=SPOTIFY_CLIENT_ID \
-    --mount=type=secret,id=SPOTIFY_CLIENT_SECRET \
-    --mount=type=secret,id=NEXTAUTH_SECRET \
-    --mount=type=secret,id=NEXTAUTH_URL \
-    --mount=type=secret,id=NEXT_PUBLIC_URL \
-    bun run build
+ENV SPOTIFY_BASE_API_URL=""
+ENV SPOTIFY_CLIENT_ID=""
+ENV SPOTIFY_CLIENT_SECRET=""
+ENV NEXTAUTH_SECRET=""
+ENV NEXTAUTH_URL=""
+ENV NEXT_PUBLIC_URL=""
 
-CMD ["bun", "start"]
+CMD ["bun", "run", "build", "&&", "bun", "start"]
