@@ -4,13 +4,13 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get --no-install-recommends install -y \
     curl \
     unzip \
     bash \
     git
 
-RUN curl -fsSL https://bun.sh/install | bash
+RUN curl --proto "=https" -fsSL https://bun.sh/install | bash
 
 ENV PATH="/root/.bun/bin:${PATH}"
 
