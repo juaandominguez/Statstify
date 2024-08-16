@@ -1,7 +1,14 @@
 #!/bin/bash
 
+hostnamectl set-hostname control-plane
+
 sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg unzip
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
@@ -41,14 +48,16 @@ sudo systemctl daemon-reload
 sudo systemctl enable cri-dockerd.service
 sudo systemctl start cri-dockerd.service
 
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket=unix:///var/run/cri-dockerd.sock --ignore-preflight-errors=NumCPU,Mem
+sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock --ignore-preflight-errors=NumCPU,Mem
 
-USER=$(cat /etc/passwd | grep bash | awk -F: '$3 >= 1000 {print $1; exit}')
+DEFAULT_USER=$(cat /etc/passwd | grep bash | awk -F: '$3 >= 1000 {print $1; exit}')
 
-mkdir -p /home/$USER/.kube
-sudo cp -i /etc/kubernetes/admin.conf /home/$USER/.kube/config
-sudo chown $(id -u $USER):$(id -g $USER) /home/$USER/.kube/config
+mkdir -p /home/$DEFAULT_USER/.kube
+sudo cp -i /etc/kubernetes/admin.conf /home/$DEFAULT_USER/.kube/config
+sudo chown $(id -u $DEFAULT_USER):$(id -g $DEFAULT_USER) /home/$DEFAULT_USER/.kube/config
 
-su $USER
+su -c "kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml" $DEFAULT_USER
 
-kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+echo "$(kubeadm token create --print-join-command) --cri-socket=unix:///var/run/cri-dockerd.sock" > /tmp/join-command.txt
+
+aws s3 cp /tmp/join-command.txt s3://${S3_BUCKET_NAME}/join-command.txt
