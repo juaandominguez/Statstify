@@ -1,8 +1,8 @@
 resource "aws_s3_bucket" "main" {
-    bucket = var.s3_bucket_name
-    tags = {
-        Name = var.s3_bucket_name
-    }
+  bucket = var.s3_bucket_name
+  tags = {
+    Name = var.s3_bucket_name
+  }
 }
 
 resource "aws_s3_bucket_ownership_controls" "main" {
@@ -20,7 +20,7 @@ resource "aws_s3_bucket_acl" "main" {
 }
 
 resource "aws_s3_bucket_public_access_block" "main" {
-  bucket = aws_s3_bucket.main.id
+  bucket                  = aws_s3_bucket.main.id
   block_public_acls       = true
   block_public_policy     = true
   ignore_public_acls      = true

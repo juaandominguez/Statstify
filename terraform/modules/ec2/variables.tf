@@ -18,12 +18,27 @@ variable "key_pair_name" {
   type        = string
 }
 
-variable "ec2_profile_id" {
-  description = "The instance profile to associate with the EC2 instance"
+variable "control_plane_id" {
+  description = "The ID of the control plane IAM profile"
+  type        = string
+}
+
+variable "worker_node_id" {
+  description = "The ID of the worker node IAM profile"
   type        = string
 }
 
 variable "s3_bucket_name" {
   description = "The name of the S3 bucket"
+  type        = string
+}
+
+variable "region" {
+  description = "The region in which the resources will be created"
+  type        = string
+}
+
+variable "sqs_queue_name" {
+  description = "The name of the SQS queue"
   type        = string
 }

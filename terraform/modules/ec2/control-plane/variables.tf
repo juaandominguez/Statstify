@@ -27,3 +27,13 @@ variable "s3_bucket_name" {
   description = "The name of the S3 bucket"
   type        = string
 }
+
+variable "region" {
+  description = "The region in which the resources will be created"
+  type        = string
+}
+
+variable "sqs_queue_name" {
+  description = "The name of the SQS queue"
+  type        = string
+}

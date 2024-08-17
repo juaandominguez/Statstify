@@ -1,4 +1,4 @@
 variable "public_key_path" {
-    description = "Path to the public key"
-    type        = string
+  description = "Path to the public key"
+  type        = string
 }

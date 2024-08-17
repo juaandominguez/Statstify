@@ -58,6 +58,8 @@ sudo chown $(id -u $DEFAULT_USER):$(id -g $DEFAULT_USER) /home/$DEFAULT_USER/.ku
 
 su -c "kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml" $DEFAULT_USER
 
-echo "$(kubeadm token create --print-join-command) --cri-socket=unix:///var/run/cri-dockerd.sock" > /tmp/join-command.txt
+msg=$(echo "$(kubeadm token create --print-join-command) --cri-socket=unix:///var/run/cri-dockerd.sock")
 
-aws s3 cp /tmp/join-command.txt s3://${S3_BUCKET_NAME}/join-command.txt
+sqs_url=$(aws sqs get-queue-url --queue-name ${SQS_QUEUE_NAME} --query 'QueueUrl' --region ${AWS_REGION} | tr -d '"')
+
+aws sqs send-message --queue-url $sqs_url --message-body "$msg" --region ${AWS_REGION} --message-group-id "k8s-group" --message-deduplication-id "unique-id-123"

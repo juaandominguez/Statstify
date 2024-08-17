@@ -14,11 +14,12 @@ provider "aws" {
 }
 
 module "dev" {
-  source          = "./environments/dev"
-  vpc_prefix      = var.vpc_prefix
-  vpc_cidr_block  = var.vpc_cidr_block
-  instance_name   = var.instance_name
-  public_key_path = var.public_key_path
-  s3_bucket_name  = var.s3_bucket_name
-  region          = var.region
+  source             = "./environments/dev"
+  vpc_prefix         = var.vpc_prefix
+  vpc_cidr_block     = var.vpc_cidr_block
+  instance_name      = var.instance_name
+  public_key_path    = var.public_key_path
+  s3_bucket_name     = var.s3_bucket_name
+  region             = var.region
+  subnet_cidr_blocks = var.subnet_cidr_blocks
 }
