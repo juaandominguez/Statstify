@@ -75,3 +75,37 @@ msg=$(echo "$(kubeadm token create --print-join-command) --cri-socket=unix:///va
 sqs_url=$(aws sqs get-queue-url --queue-name ${SQS_QUEUE_NAME} --query 'QueueUrl' --region ${AWS_REGION} | tr -d '"')
 
 aws sqs send-message --queue-url $sqs_url --message-body "$msg" --region ${AWS_REGION} --message-group-id "k8s-group" --message-deduplication-id "unique-id-123"
+
+cat <<EOF > pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    environment: production
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+EOF
+
+cat <<EOF > lb.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
+EOF
+
+su -c "kubectl apply -f pod.yaml" $DEFAULT_USER
+su -c "kubectl apply -f lb.yaml" $DEFAULT_USER
+su -c "kubectl port-forward svc/nginx-service 3000:80 --address 0.0.0.0" $DEFAULT_USER

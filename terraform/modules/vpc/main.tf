@@ -26,8 +26,8 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_network_interface" "nat" {
-  subnet_id       = aws_subnet.public.id
-  security_groups = [aws_security_group.main.id]
+  subnet_id         = aws_subnet.public.id
+  security_groups   = [aws_security_group.main.id]
   source_dest_check = false
 }
 

@@ -34,9 +34,17 @@ module "ec2" {
   s3_bucket_name        = var.s3_bucket_name
   region                = var.region
   sqs_queue_name        = module.sqs.sqs_queue_name
-  public_subnet_eni_id     = module.vpc.public_subnet_eni_id
+  public_subnet_eni_id  = module.vpc.public_subnet_eni_id
 }
 
 module "sqs" {
   source = "../../modules/sqs"
+}
+
+module "load-balancer" {
+  source           = "../../modules/load-balancer"
+  vpc_id           = module.vpc.vpc_id
+  vpc_sg_id        = module.vpc.vpc_sg_id
+  cluster-instance = module.ec2.cluster-id
+  vpc_subnet_ids   = [module.vpc.vpc_public_subnet_id, module.vpc.vpc_private_subnet_id]
 }

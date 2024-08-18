@@ -17,3 +17,8 @@ output "public_subnet_eni_id" {
   description = "The ID of the public subnet ENI"
   value       = aws_network_interface.nat.id
 }
+
+output "vpc_id" {
+  description = "The ID of the VPC"
+  value       = aws_vpc.main.id
+}
