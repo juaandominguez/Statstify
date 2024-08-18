@@ -3,8 +3,13 @@ variable "instance_name" {
   type        = string
 }
 
-variable "vpc_subnet_id" {
-  description = "The ID of the VPC to launch the EC2 instance into"
+variable "vpc_public_subnet_id" {
+  description = "The ID of the VPC public subnet to launch the EC2 instance into"
+  type        = string
+}
+
+variable "vpc_private_subnet_id" {
+  description = "The ID of the VPC public subnet to launch the EC2 instance into"
   type        = string
 }
 
@@ -40,5 +45,10 @@ variable "region" {
 
 variable "sqs_queue_name" {
   description = "The name of the SQS queue"
+  type        = string
+}
+
+variable "public_subnet_eni_id" {
+  description = "The ID of the public subnet ENI"
   type        = string
 }

@@ -25,9 +25,10 @@ resource "aws_subnet" "private" {
   }
 }
 
-resource "aws_network_interface" "public" {
+resource "aws_network_interface" "nat" {
   subnet_id       = aws_subnet.public.id
   security_groups = [aws_security_group.main.id]
+  source_dest_check = false
 }
 
 resource "aws_network_interface" "private" {
@@ -62,6 +63,12 @@ resource "aws_route_table" "private" {
   tags = {
     Name = format("%s/private-%s", var.vpc_prefix, "rt")
   }
+}
+
+resource "aws_route" "nat_route" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = "0.0.0.0/0"
+  network_interface_id   = aws_network_interface.nat.id
 }
 
 resource "aws_route_table_association" "public" {

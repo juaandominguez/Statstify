@@ -23,16 +23,18 @@ module "iam" {
 }
 
 module "ec2" {
-  source           = "../../modules/ec2"
-  instance_name    = var.instance_name
-  vpc_subnet_id    = module.vpc.vpc_public_subnet_id
-  vpc_sg_id        = module.vpc.vpc_sg_id
-  key_pair_name    = module.key_pair.key_pair_name
-  control_plane_id = module.iam.control_plane_id
-  worker_node_id   = module.iam.worker_node_id
-  s3_bucket_name   = var.s3_bucket_name
-  region           = var.region
-  sqs_queue_name   = module.sqs.sqs_queue_name
+  source                = "../../modules/ec2"
+  instance_name         = var.instance_name
+  vpc_public_subnet_id  = module.vpc.vpc_public_subnet_id
+  vpc_private_subnet_id = module.vpc.vpc_private_subnet_id
+  vpc_sg_id             = module.vpc.vpc_sg_id
+  key_pair_name         = module.key_pair.key_pair_name
+  control_plane_id      = module.iam.control_plane_id
+  worker_node_id        = module.iam.worker_node_id
+  s3_bucket_name        = var.s3_bucket_name
+  region                = var.region
+  sqs_queue_name        = module.sqs.sqs_queue_name
+  public_subnet_eni_id     = module.vpc.public_subnet_eni_id
 }
 
 module "sqs" {
