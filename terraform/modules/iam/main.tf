@@ -74,6 +74,7 @@ resource "aws_iam_role_policy" "worker_node_policy" {
       {
         Effect = "Allow",
         Action = [
+          "sqs:GetQueueUrl",
           "sqs:ReceiveMessage",
           "sqs:DeleteMessage",
           "sqs:ChangeMessageVisibility",

@@ -17,3 +17,8 @@ variable "key_pair_name" {
   description = "The key pair to associate with the EC2 instance"
   type        = string
 }
+
+variable "ec2_profile_id" {
+  description = "The instance profile to associate with the EC2 instance"
+  type        = string
+}

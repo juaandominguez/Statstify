@@ -6,6 +6,7 @@ resource "aws_instance" "kubernetes-worker-nodes" {
   subnet_id       = var.vpc_subnet_id
   key_name        = var.key_pair_name
   security_groups = [var.vpc_sg_id]
+  iam_instance_profile = var.ec2_profile_id
   root_block_device {
     volume_size = 8
   }

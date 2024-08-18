@@ -56,7 +56,19 @@ mkdir -p /home/$DEFAULT_USER/.kube
 sudo cp -i /etc/kubernetes/admin.conf /home/$DEFAULT_USER/.kube/config
 sudo chown $(id -u $DEFAULT_USER):$(id -g $DEFAULT_USER) /home/$DEFAULT_USER/.kube/config
 
+mkdir -p /opt/cni/bin
+curl -O -L https://github.com/containernetworking/plugins/releases/download/v1.2.0/cni-plugins-linux-amd64-v1.2.0.tgz
+tar -C /opt/cni/bin -xzf cni-plugins-linux-amd64-v1.2.0.tgz
+
 su -c "kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml" $DEFAULT_USER
+
+
+mkdir /run/flannel
+
+echo "FLANNEL_NETWORK=10.240.0.0/16
+FLANNEL_SUBNET=10.240.0.1/24
+FLANNEL_MTU=1450
+FLANNEL_IPMASQ=true" > /run/flannel/subnet.env
 
 msg=$(echo "$(kubeadm token create --print-join-command) --cri-socket=unix:///var/run/cri-dockerd.sock")
 
