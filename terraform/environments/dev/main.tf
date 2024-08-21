@@ -45,6 +45,16 @@ module "load-balancer" {
   source           = "../../modules/load-balancer"
   vpc_id           = module.vpc.vpc_id
   vpc_sg_id        = module.vpc.vpc_sg_id
-  cluster-instance = module.ec2.cluster-id
+  cluster-instance = module.ec2.cluster_id
   vpc_subnet_ids   = [module.vpc.vpc_public_subnet_id, module.vpc.vpc_private_subnet_id]
+}
+
+module "lambda" {
+  source     = "../../modules/lambda"
+  cluster_id = module.ec2.cluster_id
+}
+
+module "eventBridge" {
+  source     = "../../modules/eventBridge"
+  lambda_arn = module.lambda.lambda_arn
 }

@@ -76,36 +76,44 @@ sqs_url=$(aws sqs get-queue-url --queue-name ${SQS_QUEUE_NAME} --query 'QueueUrl
 
 aws sqs send-message --queue-url $sqs_url --message-body "$msg" --region ${AWS_REGION} --message-group-id "k8s-group" --message-deduplication-id "unique-id-123"
 
-cat <<EOF > pod.yaml
-apiVersion: v1
-kind: Pod
+cat <<EOF > deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: nginx
+  name: statstify-deployment
   labels:
-    environment: production
-    app: nginx
+    app: statstify
 spec:
-  containers:
-  - name: nginx
-    image: nginx
-    ports:
-    - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: statstify
+  template:
+    metadata:
+      labels:
+        app: statstify
+    spec:
+      containers:
+      - name: statstify
+        image: public.ecr.aws/statstify/statstify:latest
+        ports:
+        - containerPort: 3000
 EOF
 
 cat <<EOF > lb.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: statstify-service
 spec:
   selector:
-    app: nginx
+    app: statstify
   ports:
-    - port: 80
-      targetPort: 80
+    - port: 3000
+      targetPort: 3000
   type: LoadBalancer
 EOF
 
-su -c "kubectl apply -f pod.yaml" $DEFAULT_USER
+su -c "kubectl apply -f deployment.yaml" $DEFAULT_USER
 su -c "kubectl apply -f lb.yaml" $DEFAULT_USER
-su -c "kubectl port-forward svc/nginx-service 3000:80 --address 0.0.0.0" $DEFAULT_USER
+su -c "kubectl port-forward svc/statstify-service 80:3000 --address 0.0.0.0" $DEFAULT_USER
