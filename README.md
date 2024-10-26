@@ -5,7 +5,8 @@
 
 ![AWS Architecture](terraform/Architecture.png "AWS Architecture")
 
-> [!NOTE] > **Architecture explained in depth [here](terraform/README.md)**
+> [!NOTE]
+> **Architecture explained in depth [here](terraform/README.md)**
 
 ## What is Statstify?
 
