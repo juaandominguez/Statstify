@@ -1,28 +1,23 @@
 "use client";
 import Chart from "chart.js/auto";
 import { RadialLinearScale } from "chart.js";
-
 import {
   getRecommendedTracks,
   getTrack,
   getTrackFeatures,
-} from "@/utils/fetchWebapi";
+} from "@/utils/fetchStubApi";
 import { AudioFeatures, Track } from "@/types/types";
 import Heading from "@/components/Heading";
 import React, { useEffect, useState } from "react";
 import TrackCarrousel from "@/components/carrousels/TrackCarrousel";
-import TrackStats from "./TrackStats";
-import TrackMain from "./TrackMain";
-import TrackAudioFeatures from "./TrackAudioFeatures";
-import TrackAppearsOn from "./TrackAppearsOn";
+import TrackStats from "@/app/track/[trackId]/components/TrackStats";
+import TrackMain from "@/app/track/[trackId]/components/TrackMain";
+import TrackAudioFeatures from "@/app/track/[trackId]/components/TrackAudioFeatures";
+import TrackAppearsOn from "@/app/track/[trackId]/components/TrackAppearsOn";
 
 Chart.register(RadialLinearScale);
 
-interface TrackPageProps {
-  trackId: string;
-  session: any;
-}
-const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
+const TrackPage = () => {
   const [windowWidth, setWindowWidth] = useState<number>(0);
   const [track, setTrack] = useState<Track>();
   const [trackFeatures, setTrackFeatures] = useState<AudioFeatures>();
@@ -41,9 +36,9 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
     (async () => {
       try {
         await Promise.all([
-          getTrack(trackId, session.accessToken),
-          getTrackFeatures(trackId, session.accessToken),
-          getRecommendedTracks(trackId, session.accessToken),
+          getTrack(),
+          getTrackFeatures(),
+          getRecommendedTracks(),
         ]).then(([track, trackFeatures, recommendedTracks]) => {
           setTrack(track);
           setTrackFeatures(trackFeatures);
@@ -55,7 +50,7 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
         setIsLoading(false);
       }
     })();
-  }, [trackId, session.accessToken]);
+  }, []);
   if (isLoading) {
     return (
       <div className="flex h-[90vh] w-[90vw] items-center justify-center">
@@ -71,9 +66,9 @@ const TrackPage: React.FC<TrackPageProps> = ({ trackId, session }) => {
   }
   return (
     <article className="m-10 flex w-[80vw] flex-col items-center justify-center">
-      <TrackMain track={track} />
+      <TrackMain track={track} demo={true} />
       <TrackStats track={track} />
-      <TrackAppearsOn track={track} />
+      <TrackAppearsOn track={track} demo={true} />
       <TrackAudioFeatures trackFeatures={trackFeatures} />
       <section className="flex w-full flex-col items-start justify-start">
         <Heading

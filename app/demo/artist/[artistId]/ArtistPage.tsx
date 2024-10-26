@@ -6,19 +6,14 @@ import {
   getArtistTopAlbums,
   getArtistTopTracks,
   getRecommendedArtists,
-} from "@/utils/fetchWebapi";
+} from "@/utils/fetchStubApi";
 import Heading from "@/components/Heading";
-import ArtistMain from "./ArtistMain";
+import ArtistMain from "@/app/artist/[artistId]/components/ArtistMain";
 import TrackCarrousel from "@/components/carrousels/TrackCarrousel";
-import ArtistInfo from "./ArtistInfo";
+import ArtistInfo from "@/app/artist/[artistId]/components/ArtistInfo";
 import AlbumCarrousel from "@/components/carrousels/AlbumCarrousel";
 import ArtistCarrousel from "@/components/carrousels/ArtistCarrousel";
-
-interface TrackPageProps {
-  artistId: string;
-  session: any;
-}
-const ArtistPage: React.FC<TrackPageProps> = ({ artistId, session }) => {
+const ArtistPage = () => {
   const [windowWidth, setWindowWidth] = useState<number>(0);
   const [artist, setArtist] = useState<SpecificArtist>();
   const [topTracks, setTopTracks] = useState<Track[]>([]);
@@ -40,10 +35,10 @@ const ArtistPage: React.FC<TrackPageProps> = ({ artistId, session }) => {
     (async () => {
       try {
         await Promise.all([
-          getArtist(artistId, session.accessToken),
-          getArtistTopTracks(artistId, session.accessToken),
-          getArtistTopAlbums(artistId, session.accessToken),
-          getRecommendedArtists(artistId, session.accessToken),
+          getArtist(),
+          getArtistTopTracks(),
+          getArtistTopAlbums(),
+          getRecommendedArtists(),
         ]).then(([artist, topTracks, topAlbums, recommendedArtists]) => {
           setArtist(artist);
           setTopTracks(topTracks);
@@ -56,7 +51,7 @@ const ArtistPage: React.FC<TrackPageProps> = ({ artistId, session }) => {
         setIsLoading(false);
       }
     })();
-  }, [artistId, session.accessToken]);
+  }, []);
   if (isLoading) {
     return (
       <div className="flex h-[90vh] w-[90vw] items-center justify-center">

@@ -5,9 +5,13 @@ import formatDate from "@/utils/formatDate";
 import Image from "next/image";
 interface RecentlyPlayedProps {
   recentTracks: Item[];
+  demo?: boolean;
 }
 
-const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
+const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({
+  recentTracks,
+  demo = false,
+}) => {
   const [tracks, setTracks] = useState<Item[]>([]);
   let prevDate = "";
   useEffect(() => {
@@ -58,7 +62,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                 <div className="flex flex-row justify-between">
                   <div className="flex">
                     <a
-                      href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
+                      href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}track/${item.track.id}`}
                     >
                       <Image
                         src={item?.track?.album?.images[2]?.url}
@@ -70,7 +74,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                     </a>
                     <div className="ml-4 flex flex-col justify-center">
                       <a
-                        href={`${process.env.NEXT_PUBLIC_URL}/track/${item.track.id}`}
+                        href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}track/${item.track.id}`}
                       >
                         <h4 className="cursor-pointer font-bold text-white">
                           {item?.track?.name}
@@ -86,7 +90,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                         >
                           {item?.track?.artists?.map((artist, index) => (
                             <a
-                              href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+                              href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}artist/${artist.id}`}
                               key={artist.id}
                               className="mr-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
                             >
@@ -99,7 +103,7 @@ const RecentlyPlayed: React.FC<RecentlyPlayedProps> = ({ recentTracks }) => {
                           ))}
                         </div>
                         <a
-                          href={`${process.env.NEXT_PUBLIC_URL}/album/${item.track.album.id}`}
+                          href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}album/${item.track.album.id}`}
                           className="ml-1 mr-3 line-clamp-1 cursor-pointer text-sm font-semibold duration-200 hover:text-white"
                           style={{
                             display: "-webkit-box",

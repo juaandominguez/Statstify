@@ -4,11 +4,15 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 interface TopArtistsProps {
   topArtists: SpecificArtist[];
+  demo?: boolean;
 }
 
-const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
+const TopArtists: React.FC<TopArtistsProps> = ({
+  topArtists,
+  demo = false,
+}) => {
   const [currentTopArtists, setCurrentTopArtists] = useState<SpecificArtist[]>(
-    []
+    [],
   );
   const [page, setPage] = useState<number>(1);
   useEffect(() => {
@@ -67,7 +71,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
                   className="mb-10 flex flex-col items-center justify-start md:my-10"
                 >
                   <a
-                    href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+                    href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}artist/${artist.id}`}
                   >
                     <div className="flex h-[9rem] w-[9rem] items-center justify-center overflow-hidden rounded-full sm:h-[11rem] sm:w-[11rem]">
                       <Image
@@ -81,7 +85,7 @@ const TopArtists: React.FC<TopArtistsProps> = ({ topArtists }) => {
                     </div>
                   </a>
                   <a
-                    href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+                    href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}artist/${artist.id}`}
                     target="_blank"
                     className="mt-4 line-clamp-2 max-h-[50px] cursor-pointer overflow-hidden text-center font-semibold text-white"
                     style={{

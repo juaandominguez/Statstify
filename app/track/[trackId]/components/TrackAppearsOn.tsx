@@ -4,8 +4,9 @@ import Heading from "@/components/Heading";
 import { Track } from "@/types/types";
 interface Props {
   track: Track;
+  demo?: boolean;
 }
-const TrackAppearsOn: React.FC<Props> = ({ track }) => {
+const TrackAppearsOn: React.FC<Props> = ({ track, demo = false }) => {
   return (
     <section className="flex w-full flex-col items-start justify-start">
       <Heading
@@ -14,7 +15,7 @@ const TrackAppearsOn: React.FC<Props> = ({ track }) => {
         margin={false}
       />
       <a
-        href={`${process.env.NEXT_PUBLIC_URL}/album/${track?.album.id}`}
+        href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}album/${track?.album.id}`}
         className="mt-5 flex w-[40vw] sm:w-[30vw] lg:w-[20vw] xl:w-[10vw]"
       >
         <Image

@@ -4,8 +4,9 @@ import Image from "next/image";
 import spotify from "@/public/assets/spotify.svg";
 interface Props {
   track: Track;
+  demo?: boolean;
 }
-const TrackMain: React.FC<Props> = ({ track }) => {
+const TrackMain: React.FC<Props> = ({ track, demo = false }) => {
   return (
     <section className="flex w-full flex-col items-center md:flex-row">
       <a
@@ -26,7 +27,7 @@ const TrackMain: React.FC<Props> = ({ track }) => {
         <p className="font-semibold">
           {track?.artists?.map((artist, index) => (
             <a
-              href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+              href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}artist/${artist.id}`}
               key={artist.id}
               className="duration-200 hover:text-white"
             >

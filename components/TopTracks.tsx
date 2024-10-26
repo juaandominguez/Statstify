@@ -4,9 +4,10 @@ import { Artist, Track } from "@/types/types";
 import Image from "next/image";
 interface TopTracksProps {
   topTracks: Track[];
+  demo?: boolean;
 }
 
-const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
+const TopTracks: React.FC<TopTracksProps> = ({ topTracks, demo = false }) => {
   const [currentTopTracks, setCurrentTopTracks] = useState<Track[]>(topTracks);
   const [page, setPage] = useState<number>(1);
   useEffect(() => {
@@ -64,7 +65,9 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                   key={track.id}
                   className="mb-10 flex flex-col items-center justify-start md:my-10"
                 >
-                  <a href={`${process.env.NEXT_PUBLIC_URL}/track/${track.id}`}>
+                  <a
+                    href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}track/${track.id}`}
+                  >
                     <Image
                       priority
                       src={track?.album?.images[0]?.url}
@@ -76,7 +79,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                     />
                   </a>
                   <a
-                    href={`${process.env.NEXT_PUBLIC_URL}/track/${track.id}`}
+                    href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}track/${track.id}`}
                     className="mt-4 line-clamp-2 max-h-[50px] cursor-pointer overflow-hidden text-center font-semibold text-white"
                     style={{
                       lineHeight: "25px",
@@ -96,7 +99,7 @@ const TopTracks: React.FC<TopTracksProps> = ({ topTracks }) => {
                   >
                     {track?.artists?.map((artist: Artist, index: number) => (
                       <a
-                        href={`${process.env.NEXT_PUBLIC_URL}/artist/${artist.id}`}
+                        href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}artist/${artist.id}`}
                         key={artist.id}
                         className="cursor-pointer duration-200 hover:text-white"
                       >{`${artist.name}${

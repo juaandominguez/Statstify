@@ -3,11 +3,16 @@
 ![Statstify Home Image](https://statstify.vercel.app/og.png)
 ![Statstify Audio Features](https://statstify.vercel.app/audio_features.png)
 
+![AWS Architecture](terraform/Architecture.png "AWS Architecture")
+
+> [!NOTE] > **Architecture explained in depth [here](terraform/README.md)**
+
+## What is Statstify?
+
 Statstify is a web application that allows users to get their top tracks, artists, and recent plays on Spotify in 3 time ranges: last month, last 6 months, and lifetime, as well as individual track and artist information. It uses the Spotify API and nextAuth authentication to provide a seamless and secure user experience.
 
 > [!IMPORTANT]  
 > The application is currently in a closed beta to fullfill Spotify restrictions. Please contact me to request access and I will get back to you as soon as posible.
-
 
 ## Installation and Usage
 
@@ -38,5 +43,6 @@ Statstify provides users with a simple and intuitive interface to view their top
 - Recent plays: View your recent plays on Spotify.
 - Tracks: View the main characteristics of each song, and recommended similiar tracks.
 - Artists: View the top tracks and albums of each artist, and recommended similiar artists.
+- Playlists: View public playlists and its content
 - Search: Find your favourite track, artists and albums in a easy and intuitive manner.
-- Tier List: Coming soon...
+- Tier List: Create tierlists for your favourite playlists and albums.

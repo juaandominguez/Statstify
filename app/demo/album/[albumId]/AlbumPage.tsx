@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import AlbumMain from "./AlbumMain";
 import { Album, Track } from "@/types/types";
-import { getAlbum, getAlbumTracks } from "@/utils/fetchWebapi";
-import AlbumStats from "./AlbumStats";
-import AlbumTracks from "./AlbumTracks";
-interface Props {
+import { getAlbum, getAlbumTracks } from "@/utils/fetchStubApi";
+import AlbumMain from "@/app/album/[albumId]/components/AlbumMain";
+import AlbumStats from "@/app/album/[albumId]/components/AlbumStats";
+import AlbumTracks from "@/app/album/[albumId]/components/AlbumTracks";
+
+interface AlbumPageProps {
   albumId: string;
-  session: any;
 }
 
-const AlbumPage: React.FC<Props> = ({ albumId, session }) => {
+const AlbumPage: React.FC<AlbumPageProps> = ({ albumId }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [album, setAlbum] = useState<Album | null>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
@@ -18,20 +18,19 @@ const AlbumPage: React.FC<Props> = ({ albumId, session }) => {
     setIsLoading(true);
     (async () => {
       try {
-        await Promise.all([
-          getAlbum(albumId, session.accessToken),
-          getAlbumTracks(albumId, session.accessToken),
-        ]).then(([albumFetch, albumTracksFetch]) => {
-          setAlbum(albumFetch);
-          setTracks(albumTracksFetch);
-        });
+        await Promise.all([getAlbum(), getAlbumTracks()]).then(
+          ([albumFetch, albumTracksFetch]) => {
+            setAlbum(albumFetch);
+            setTracks(albumTracksFetch);
+          },
+        );
       } catch (e) {
         console.error(e);
       } finally {
         setIsLoading(false);
       }
     })();
-  }, [albumId, session.accessToken]);
+  }, []);
   if (isLoading) {
     return (
       <div className="flex h-[90vh] w-[90vw] items-center justify-center">
@@ -47,7 +46,7 @@ const AlbumPage: React.FC<Props> = ({ albumId, session }) => {
   }
   return (
     <article className="m-10 flex w-[80vw] flex-col items-center justify-center">
-      <AlbumMain album={album} albumId={albumId} />
+      <AlbumMain album={album} albumId={albumId} demo={true} />
       <AlbumStats album={album} />
       <AlbumTracks tracks={tracks} />
     </article>

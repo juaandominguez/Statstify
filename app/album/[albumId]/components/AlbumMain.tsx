@@ -5,9 +5,10 @@ import { Album } from "@/types/types";
 interface Props {
   album: Album;
   albumId: string;
+  demo?: boolean;
 }
 
-const AlbumMain: React.FC<Props> = ({ album, albumId }) => {
+const AlbumMain: React.FC<Props> = ({ album, albumId, demo = false }) => {
   return (
     <section className="flex w-full flex-col items-center md:flex-row">
       <a
@@ -37,7 +38,7 @@ const AlbumMain: React.FC<Props> = ({ album, albumId }) => {
             </a>
           </div>
           <a
-            href={`${process.env.NEXT_PUBLIC_URL}/tierlist/album/${albumId}`}
+            href={`${process.env.NEXT_PUBLIC_URL}/${demo ? "demo/" : ""}tierlist/album/${albumId}`}
             className=" my-auto ml-4 rounded-lg border px-4 py-1 text-center opacity-80 transition-all duration-300 hover:bg-[#A2A2A2]/20 hover:text-white"
           >
             Tierlist

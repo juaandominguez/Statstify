@@ -57,7 +57,7 @@ const HomePage: React.FC<HomePageProps> = ({ timeRange }) => {
         title="Top Tracks"
         description={`Your top tracks ${getDescription()}`}
       />
-      <TopTracks topTracks={topTracks} />
+      <TopTracks topTracks={topTracks} demo={true} />
       <Heading
         title="Top Genres"
         description={`Your top genres ${getDescription()}`}
@@ -67,12 +67,12 @@ const HomePage: React.FC<HomePageProps> = ({ timeRange }) => {
         title="Top Artists"
         description={`Your top artists ${getDescription()}`}
       />
-      <TopArtists topArtists={topArtists} />
+      <TopArtists topArtists={topArtists} demo={true} />
       <Heading
         title="Recent Streams"
         description={`Your recently played songs`}
       />
-      <RecentlyPlayed recentTracks={recentTracks} />
+      <RecentlyPlayed recentTracks={recentTracks} demo={true} />
     </div>
   );
 };
